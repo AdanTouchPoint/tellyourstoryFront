@@ -1,0 +1,23 @@
+h1 {
+    padding: 3rem 0;
+    text-align: center;
+    letter-spacing: 1px;
+}
+h2 {
+    padding: 2rem 0;
+}
+header {
+    padding: 3rem 0;
+    text-align: center;
+}
+button {
+    align-items: center;
+    padding: 5px 5px 5px 5px;
+}
+
+.container {
+    padding: 3rem 0;
+    background-color: white;
+    text-align: center;
+    align-items: center;
+}
