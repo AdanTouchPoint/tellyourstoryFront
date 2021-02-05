@@ -1,5 +1,4 @@
 import React, {Fragment} from 'react'
-import Card from "react-bootstrap/cjs/Card";
 import Button from "react-bootstrap/cjs/Button";
 import Container from "react-bootstrap/cjs/Container";
 import Row from "react-bootstrap/cjs/Row";
