@@ -1,7 +1,7 @@
 import React, {Fragment, useState} from 'react';
 import InputGroup from "react-bootstrap/InputGroup";
 import Form from "react-bootstrap/Form";
-//import Card from "react-bootstrap/cjs/Card";
+import Button from "react-bootstrap/cjs/Button";
 import Container from "react-bootstrap/cjs/Container";
 import Row from "react-bootstrap/cjs/Row";
 import Col from "react-bootstrap/cjs/Col";
@@ -9,19 +9,8 @@ import Col from "react-bootstrap/cjs/Col";
 const cryptoRandomString = require("crypto-random-string");
 
 
-const RegisterForm = ({createUser}) => {
+const RegisterForm = ({user, setUser, hidden, smokerSub, setSmokerSub, setNoSmokerSub}) => {
 
-    const [user, setUser] = useState({
-        submissionType: '',
-        name: '',
-        lastName: '',
-        age: '',
-        city: '',
-        state: '',
-        cp: '',
-        email: '',
-        id: ''
-    });
     const [error, setError] = useState(false)
     const handleChange = e => {
         setUser({
@@ -31,9 +20,9 @@ const RegisterForm = ({createUser}) => {
         console.log(e.target.value)
         console.log(user)
     }
-    const {submissionType, name, lastName, age, city, state, cp, email} = user;
+    const {submissionType, name, lastName, age, city, state, cp, email, smoker} = user;
 
-    const submitUser = e => {
+    const click = e => {
         e.preventDefault();
         if (submissionType.trim() === '' || name.trim() === '' || lastName.trim() === '' ||
             age.trim() === '' || city.trim() === '' || state.trim() === '' || cp.trim() === '' || email.trim() === '') {
@@ -41,123 +30,148 @@ const RegisterForm = ({createUser}) => {
             return
         }
         setError(false)
-
-        createUser(user)
         const randomId = cryptoRandomString({type: 'distinguishable', length: 10})
         user.id = randomId;
         console.log(user)
 
-        setUser({
-            submissionType: '',
-            name: '',
-            lastName: '',
-            age: '',
-            city: '',
-            state: '',
-            cp: '',
-            email: '',
-            id: ''
-        })
+        if (smoker === "1") {
+            setSmokerSub(false)
+        }
+        else {
+            setNoSmokerSub(false)
+        }
     }
 
     return (
         <Fragment>
-            <Container>
+            <Container hidden={hidden}>
                 <Row>
-                    <Col xs={12} md={8} lg={6}
+                    <Col xs={10} md={8} lg={8}
                          className={"container"}>
 
-                <h2>Register</h2>
-                {error ? <p className='alerta-error'>Todos los campos son olbigatorios</p> : null}
-                <Form
-                    onSubmit={submitUser}
-                >
-                    <Form.Group controlId="submissionType">
-                        <Form.Label>Example select</Form.Label>
-                        <InputGroup className="mb-2">
-                            <InputGroup.Prepend>
-                                <InputGroup.Text>Do You Want Your Submission</InputGroup.Text>
-                            </InputGroup.Prepend>
-                            <Form.Control
-                                as="select"
-                                name="submissionType"
-                                onChange={handleChange}
-                            >
-                                <option>Choose...</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                            </Form.Control>
-                        </InputGroup>
-                    </Form.Group>
-                    <Form.Group controlId="name">
-                        <Form.Control
-                            type="text"
-                            placeholder="Name"
-                            name="name"
-                            onChange={handleChange}
-                        />
-                    </Form.Group>
-                    <Form.Group controlId="lastName">
-                        <Form.Control
-                            type="text"
-                            placeholder="LastName"
-                            name="cp"
-                            onChange={handleChange}
-                        />
-                    </Form.Group>
-                    <Form.Group controlId="age">
-                        <Form.Control
-                            type="number"
-                            placeholder="Age"
-                            name="age"
-                            onChange={handleChange}
-                        />
-                    </Form.Group>
-                    <Form.Group controlId="city">
-                        <Form.Control
-                            type="text"
-                            placeholder="City"
-                            name="city"
-                            onChange={handleChange}
-                        />
-                    </Form.Group>
-                    <Form.Group controlId="state">
-                        <Form.Control
-                            type="text"
-                            placeholder="State"
-                            name="state"
-                            onChange={handleChange}
-                        />
-                    </Form.Group>
-                    <Form.Group controlId="cp">
-                        <Form.Control
-                            type="text"
-                            placeholder="Code Postal"
-                            name="cp"
-                            onChange={handleChange}
-                        />
-                    </Form.Group>
-                    <Form.Group controlId="email">
-                        <Form.Control
-                            type="email"
-                            placeholder="Enter email"
-                            name="email"
-                            onChange={handleChange}
-                        />
-                    </Form.Group>
+                        <h1>Register</h1>
+                        {error ? <p className='alerta-error'>Todos los campos son olbigatorios</p> : null}
+                        <Form>
+                            <Form.Group controlId="submissionType">
 
-                    <button
-                        type={'submit'}
-                        className={'u-full-width'}
-                    >
-                        Save
-                    </button>
-                </Form>
-                </Col>
-            </Row>
-        </Container>
+                                <InputGroup className="mb-2">
+                                    <InputGroup.Prepend>
+                                        <InputGroup.Text>Do You Want Your Submission</InputGroup.Text>
+                                    </InputGroup.Prepend>
+                                    <Form.Control
+                                        as="select"
+                                        name="submissionType"
+                                        onChange={handleChange}
+
+                                    >
+                                        <option>Choose...</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                    </Form.Control>
+                                </InputGroup>
+                            </Form.Group>
+                            <Form.Group controlId="name">
+                                <Form.Control
+                                    type="text"
+                                    placeholder="Name"
+                                    name="name"
+                                    onChange={handleChange}
+
+                                />
+                            </Form.Group>
+                            <Form.Group controlId="lastName">
+                                <Form.Control
+                                    type="text"
+                                    placeholder="LastName"
+                                    name="lastName"
+                                    onChange={handleChange}
+
+                                />
+                            </Form.Group>
+
+                            <Form.Group controlId="age">
+                                <InputGroup>
+                                    <InputGroup.Prepend>
+                                        <InputGroup.Text>Age</InputGroup.Text>
+                                    </InputGroup.Prepend>
+                                <Form.Control
+                                  type={"number"}
+                                    placeholder="Age"
+                                    name="age"
+                                    onChange={handleChange}
+                                />
+                                </InputGroup>
+                            </Form.Group>
+
+                            <Form.Group controlId="city">
+                                <Form.Control
+                                    type="text"
+                                    placeholder="City"
+                                    name="city"
+                                    onChange={handleChange}
+
+                                />
+                            </Form.Group>
+
+                            <Form.Group controlId="state">
+                                <InputGroup className="mb-2">
+                                    <InputGroup.Prepend>
+                                        <InputGroup.Text>State</InputGroup.Text>
+                                    </InputGroup.Prepend>
+                                <Form.Control
+                                    as="select"
+                                    placeholder="State"
+                                    name="state"
+                                    onChange={handleChange}
+
+                                >
+                                <option>Choose...</option>
+                                <option>New South Wales</option>
+                                <option>Victoria</option>
+                                <option>Queensland</option>
+                                <option>Tasmania</option>
+                                    <option>Western Australia</option>
+                                    <option>South Australia</option>
+                                    <option> Australian Capital Territory</option>
+                                    <option> Northern Territory</option>
+                                    </Form.Control>
+                                </InputGroup>
+                            </Form.Group>
+
+                            <Form.Group controlId="cp">
+                                <Form.Control
+                                    type="text"
+                                    placeholder="Code Postal"
+                                    name="cp"
+                                    onChange={handleChange}
+
+                                />
+                            </Form.Group>
+                            <Form.Group controlId="email">
+                                <Form.Control
+                                    type="email"
+                                    placeholder="Enter email"
+                                    name="email"
+                                    onChange={handleChange}
+
+                                />
+                            </Form.Group>
+                            <Form.Group>
+                                <Button
+                                    size={'lg'}
+                                     onClick={click}
+                                    className={'u-full-width'
+                                    }
+                                >
+                                    Save
+                                </Button>
+                            </Form.Group>
+                        </Form>
+                    </Col>
+                </Row>
+            </Container>
 
         </Fragment>
     )

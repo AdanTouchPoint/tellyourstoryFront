@@ -10,14 +10,20 @@ header {
     padding: 3rem 0;
     text-align: center;
 }
-button {
-    align-items: center;
-    padding: 5px 5px 5px 5px;
+.Button1 {
+
+
 }
 
 .container {
-    padding: 3rem 0;
+    padding-bottom: 3rem;
+    margin: 3rem 3rem ;
     background-color: white;
-    text-align: center;
+    text-align: justify-all;
     align-items: center;
+    height: content-box;
 }
+/*.shadow{*/
+
+/*   	box-shadow: -5px 10px 0px 0px rgba(97, 99, 93, 0.83);*/
+/*}*/
