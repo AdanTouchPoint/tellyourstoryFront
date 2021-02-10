@@ -1,28 +1,31 @@
-import React, {Fragment} from 'react'
+import React, {Fragment, useEffect, useState} from 'react'
 import Button from "react-bootstrap/cjs/Button";
 import Container from "react-bootstrap/cjs/Container";
 import Row from "react-bootstrap/cjs/Row";
 import Col from "react-bootstrap/cjs/Col";
 import Card from "react-bootstrap/Card";
+import axios from "axios";
 
-
-const AnswersViewSmoker = ({user,dataSmokerSub,smokerAnswers, setShowThankYou,setSmokerAnswers,setHidden,setSmokerSub}) => {
-    const { story,prescription, years,quit,products,money,words } = dataSmokerSub
-    const { submissionType, name, lastName, age, city, state, cp, email, smoker} = user;
-
-    const click =e => {
+const AnswersViewSmoker = ({user, dataSmokerSub, smokerAnswers, setShowThankYou, setSmokerAnswers, setHidden, setSmokerSub}) => {
+    const {story, prescription, years, quit, products, money, words} = dataSmokerSub
+    const {submissionType, name, lastName, age, city, state, cp, email, smoker} = user;
+    const map =  Object.assign(user, dataSmokerSub)
+       const click = async e => {
         e.preventDefault();
         setShowThankYou(false)
         setSmokerSub(true)
         setHidden(true)
         setSmokerAnswers(true)
+        console.log(map)
+        await axios.post(`http://localhost:8080/send-email`,map).then((resultOk) => {
+        })
     }
     return (
         <Fragment>
             <Container hidden={smokerAnswers}>
                 <Row>
                     <Col xs={12} md={8} lg={6}
-                         className={"container"}>
+                         className={""}>
                         <h2> Review your Answers</h2>
                         <p>
                             Please review your answers carefully before submitting. Once you click send, your submission
@@ -32,7 +35,7 @@ const AnswersViewSmoker = ({user,dataSmokerSub,smokerAnswers, setShowThankYou,se
                         <p>
                             Your submission will be laid out as follows
                         </p>
-                        <Card body className={"shadow"}>
+                        <Card body>
 
                             <p>
                                 SUBJECT:{submissionType} - {name} {lastName} submission to the Tobacco Harm
@@ -55,7 +58,8 @@ const AnswersViewSmoker = ({user,dataSmokerSub,smokerAnswers, setShowThankYou,se
                                 {products}
                                 {products}
                                 {products}
-But Vaping is the only method that worked for me. I have saved between {money} by switching to vaping
+                                But Vaping is the only method that worked for me. I have saved between {money} by
+                                switching to vaping
                                 I {prescription} support a prescription-only model to obtain liquid nicotine
 
                                 {story}
@@ -70,7 +74,6 @@ But Vaping is the only method that worked for me. I have saved between {money} b
                         </p>
                         <Button
                             onClick={click}
-
                             className={'u-full-width'}
                         >
                             Send Now!
@@ -79,7 +82,6 @@ But Vaping is the only method that worked for me. I have saved between {money} b
                 </Row>
             </Container>
         </Fragment>
-
     )
 }
 

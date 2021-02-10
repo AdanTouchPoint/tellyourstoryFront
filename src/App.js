@@ -6,6 +6,7 @@ import NoSmokerSubmission from "./components/NoSmokerSubmission";
 import AnswersView from "./components/AnswersView";
 import AnswersViewSmoker from "./components/AnswersViewSmoker";
 import ThankYou from "./components/ThankYou";
+import Footer from './components/Footer'
 
 function App() {
 
@@ -21,7 +22,6 @@ function App() {
         id: '',
         smoker: ''
     });
-
     const [dataNoSmokerSub, setDataNoSmokerSub] = useState({
         close: '',
         prescription: '',
@@ -45,10 +45,11 @@ function App() {
     const [smokerAnswers, setSmokerAnswers] = useState(true)
     const [showThankYou, setShowThankYou] = useState(true)
     return (
-        <div className="App" style={{background: '#6a7b8d'}}>
+        <div style={{display:'flex', flexDirection: 'column', height:'100vh' }} >
             <header style={{background: '#e4eaf1'}}>
                 <img width={'15%'} src='../public/legalise-vaping-logo.png' alt='img1'/>
             </header>
+            <div style={{background: '#6a7b8d', flex:'1'}}>
             <h1 style={{color: 'white'}}>
                 Tell Your Story
             </h1>
@@ -101,7 +102,11 @@ function App() {
             />
             <ThankYou
                 showThankYou={showThankYou}/>
+            </div>
+        <Footer />
+
         </div>
+
     );
 }
 

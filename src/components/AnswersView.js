@@ -1,30 +1,31 @@
-import React, {Fragment} from 'react'
+import React, {Fragment, useEffect, useState} from 'react'
 import Button from "react-bootstrap/cjs/Button";
 import Container from "react-bootstrap/cjs/Container";
 import Row from "react-bootstrap/cjs/Row";
 import Col from "react-bootstrap/cjs/Col";
 import Card from "react-bootstrap/Card";
-
+import axios from 'axios'
 
 const AnswersView = ({noSmokerAnswers, dataNoSmokerSub, user, setShowThankYou, setNoSmokerSub, setHidden, setNoSmokerAnswers}) => {
-
     const {story, prescription, close} = dataNoSmokerSub
     const {submissionType, name, lastName, age, city, state, cp, email, smoker} = user;
-
-    const click = e => {
+    const map =  Object.assign(user, dataNoSmokerSub)
+    const click = async e => {
         e.preventDefault();
         setShowThankYou(false)
         setNoSmokerSub(true)
         setHidden(true)
         setNoSmokerAnswers(true)
+          console.log(map)
+        await axios.post(`http://localhost:8080/send-email`, map).then((resultOk) => {
+        })
     }
-
     return (
         <Fragment>
             <Container hidden={noSmokerAnswers}>
                 <Row>
                     <Col xs={12} md={8} lg={6}
-                         className={"container"}>
+                         className={""}>
                         <h2> Review your Answers</h2>
                         <p>
                             Please review your answers carefully before submitting. Once you click send, your submission
@@ -53,8 +54,6 @@ const AnswersView = ({noSmokerAnswers, dataNoSmokerSub, user, setShowThankYou, s
                                 Thank you for the opportunity to provide a submission on this critical issue.
                                 My name is {name} {lastName} from {city} {state}. My:
                                 {close}
-                                {close}
-                                {close}
                                 quit smoking by switching to vaping.
                                 I {prescription} support a prescription-only model to obtain liquid nicotine
                                 The reason I support Vaping is below
@@ -72,7 +71,6 @@ const AnswersView = ({noSmokerAnswers, dataNoSmokerSub, user, setShowThankYou, s
 
 
                         <Button
-
                             onClick={click}
                             className={'u-full-width'}
                         >

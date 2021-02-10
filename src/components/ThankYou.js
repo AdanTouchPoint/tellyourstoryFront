@@ -9,17 +9,14 @@ const ThankYou = ({showThankYou}) => {
 
 
     return (
-        <Fragment>
-            <Container hidden={showThankYou}>
-                <Row>
-                    <Col xs={12} md={8} lg={6}
-                         className={"container"}>
-                            <h1>Thank You!</h1>
-                        <h3>Your submission has been sent</h3>
-                    </Col>
-                </Row>
-            </Container>
-        </Fragment>
+
+        <div hidden={showThankYou} className={'container'} style={{justifyContent:'center', display:'flex'}}>
+            <div style={{maxWidth: '700px', width: '100%'}}>
+                <h1>Thank You!</h1>
+                <h3>Your submission has been sent</h3>
+            </div>
+        </div>
+
 
     )
 }

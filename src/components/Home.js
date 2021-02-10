@@ -4,9 +4,7 @@ import Container from "react-bootstrap/cjs/Container";
 import Row from "react-bootstrap/cjs/Row";
 import Col from "react-bootstrap/cjs/Col";
 
-
 const Home = ({user, setUser,hidden, setHidden}) => {
-
     const handleClick = e => {
         setUser({
             ...user,
@@ -18,14 +16,11 @@ const Home = ({user, setUser,hidden, setHidden}) => {
         console.log(user)
         console.log(hidden)
     }
-
     return (
         <Fragment>
-            <Container   className={"container"}  >
+            <Container className={"containerText"}>
                 <Row>
-                    <Col
-                         >
-
+                    <Col>
                         <h2> Using this platform you can write and send your submission to the Select Committee on
                             Tobacco Harm
                             Reduction. Make your voice heard!</h2>
@@ -47,7 +42,6 @@ const Home = ({user, setUser,hidden, setHidden}) => {
                             Committee website.</p>
 
                         <p> If possible, please do not use Internet Explorer to complete the survey.</p>
-
                     </Col>
                 </Row>
                 <Row className={"Button1"}>
@@ -58,11 +52,8 @@ const Home = ({user, setUser,hidden, setHidden}) => {
                         <Button size={'lg'} onClick={handleClick} size={"lg"} name={ 'smoker'} value = {'2'} variant="info">I don´t vape, but am a supporter</Button>
                     </Col>
                 </Row>
-
             </Container>
-
         </Fragment>
-
     )
 }
 
