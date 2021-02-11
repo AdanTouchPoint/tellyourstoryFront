@@ -2,10 +2,12 @@ import React, {useState} from 'react';
 import InputGroup from "react-bootstrap/InputGroup";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/cjs/Button";
+import Alert from "react-bootstrap/Alert";
 
 const cryptoRandomString = require("crypto-random-string");
 
 const RegisterForm = ({user, setUser, hidden, smokerSub, setSmokerSub, setNoSmokerSub}) => {
+    const [validated, setValidated] = useState(false);
     const [error, setError] = useState(false)
     const handleChange = e => {
         setUser({
@@ -18,6 +20,12 @@ const RegisterForm = ({user, setUser, hidden, smokerSub, setSmokerSub, setNoSmok
     const {submissionType, name, lastName, age, city, state, cp, email, smoker} = user;
     const click = e => {
         e.preventDefault();
+        const form = e.currentTarget;
+        if (form.checkValidity() === false) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+        setValidated(true);
         if (submissionType.trim() === '' || name.trim() === '' || lastName.trim() === '' ||
             age.trim() === '' || city.trim() === '' || state.trim() === '' || cp.trim() === '' || email.trim() === '') {
             setError(true)
@@ -37,10 +45,12 @@ const RegisterForm = ({user, setUser, hidden, smokerSub, setSmokerSub, setNoSmok
         <div hidden={hidden} className={'container'} style={{justifyContent: 'center', display: 'flex'}}>
             <div style={{maxWidth: '700px', width: '100%'}}>
                 <h1>Register</h1>
-                {error ? <p className='alerta-error'>Todos los campos son olbigatorios</p> : null}
-                <Form>
+                {error ? <Alert variant={'danger'} >
+                    All fields are required!
+                </Alert> : null}
+                <Form noValidate validated={validated} >
                     <Form.Group controlId="submissionType">
-                        <InputGroup className="mb-2">
+                        <InputGroup className="mb-2" >
                             <InputGroup.Prepend>
                                 <InputGroup.Text>Do You Want Your Submission</InputGroup.Text>
                             </InputGroup.Prepend>
@@ -48,13 +58,17 @@ const RegisterForm = ({user, setUser, hidden, smokerSub, setSmokerSub, setNoSmok
                                 as="select"
                                 name="submissionType"
                                 onChange={handleChange}
-                            >
-                                <option>Choose...</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
+                                required
+                                >
+                                <option></option>
+                                <option>Public: the material is published on the internet whit your name </option>
+                                <option>Name-whith held: the material is published on the inter without your name</option>
+                                <option>Confidential: the material is not published onn the internet and kept confidential by the Committee</option>
+
                             </Form.Control>
+                            <Form.Control.Feedback type="invalid">
+                                Please choose a Type of Submission.
+                            </Form.Control.Feedback>
                         </InputGroup>
                     </Form.Group>
                     <Form.Group controlId="name">
@@ -63,6 +77,7 @@ const RegisterForm = ({user, setUser, hidden, smokerSub, setSmokerSub, setNoSmok
                             placeholder="Name"
                             name="name"
                             onChange={handleChange}
+                            required
                         />
                     </Form.Group>
                     <Form.Group controlId="lastName">
@@ -71,10 +86,11 @@ const RegisterForm = ({user, setUser, hidden, smokerSub, setSmokerSub, setNoSmok
                             placeholder="LastName"
                             name="lastName"
                             onChange={handleChange}
+                            required
                         />
                     </Form.Group>
                     <Form.Group controlId="age">
-                        <InputGroup>
+                        <InputGroup >
                             <InputGroup.Prepend>
                                 <InputGroup.Text>Age</InputGroup.Text>
                             </InputGroup.Prepend>
@@ -83,6 +99,7 @@ const RegisterForm = ({user, setUser, hidden, smokerSub, setSmokerSub, setNoSmok
                                 placeholder="Age"
                                 name="age"
                                 onChange={handleChange}
+                                required
                             />
                         </InputGroup>
                     </Form.Group>
@@ -92,10 +109,11 @@ const RegisterForm = ({user, setUser, hidden, smokerSub, setSmokerSub, setNoSmok
                             placeholder="City"
                             name="city"
                             onChange={handleChange}
+                            required
                         />
                     </Form.Group>
                     <Form.Group controlId="state">
-                        <InputGroup className="mb-2">
+                        <InputGroup  className="mb-2">
                             <InputGroup.Prepend>
                                 <InputGroup.Text>State</InputGroup.Text>
                             </InputGroup.Prepend>
@@ -104,6 +122,7 @@ const RegisterForm = ({user, setUser, hidden, smokerSub, setSmokerSub, setNoSmok
                                 placeholder="State"
                                 name="state"
                                 onChange={handleChange}
+                                required
                             >
                                 <option>Choose...</option>
                                 <option>New South Wales</option>
@@ -123,6 +142,7 @@ const RegisterForm = ({user, setUser, hidden, smokerSub, setSmokerSub, setNoSmok
                             placeholder="Code Postal"
                             name="cp"
                             onChange={handleChange}
+                            required
                         />
                     </Form.Group>
                     <Form.Group controlId="email">
@@ -131,6 +151,7 @@ const RegisterForm = ({user, setUser, hidden, smokerSub, setSmokerSub, setNoSmok
                             placeholder="Enter email"
                             name="email"
                             onChange={handleChange}
+                            required
                         />
                     </Form.Group>
                     <Form.Group>

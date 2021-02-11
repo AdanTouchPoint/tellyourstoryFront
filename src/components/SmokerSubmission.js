@@ -1,29 +1,12 @@
-import React, {Fragment, useEffect, useState} from 'react';
-import InputGroup from "react-bootstrap/InputGroup";
+import React, {useEffect, useState} from 'react';
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/cjs/Button";
-import Container from "react-bootstrap/cjs/Container";
-import Row from "react-bootstrap/cjs/Row";
-import Col from "react-bootstrap/cjs/Col";
+import Alert from 'react-bootstrap/Alert'
 
 const cryptoRandomString = require("crypto-random-string");
 
-
-// const handleRadios = e => {
-//     setRadiosData([
-//         ...radiosData,
-//         e.target.value
-//     ])
-//     setDataNoSmokerSub({
-//         ...dataNoSmokerSub,
-//         [e.target.name]: [
-//             ...radiosData,
-//             e.target.value].join(',')
-//     })
-//     console.log(e.target.value)
-// }
-
 const SmokerSubmission = ({setDataSmokerSub, smokerSub, setSmokerAnswers, dataSmokerSub}) => {
+    const [validated, setValidated] = useState(false)
     const randomId = cryptoRandomString({type: 'distinguishable', length: 10})
     dataSmokerSub.id = randomId;
     const [productsData, setProductsData] = useState([])
@@ -54,6 +37,12 @@ const SmokerSubmission = ({setDataSmokerSub, smokerSub, setSmokerAnswers, dataSm
     const {years, quit, products, money, prescription, story, words} = dataSmokerSub;
     const click = e => {
         e.preventDefault();
+        const form = e.currentTarget;
+        if (form.checkValidity() === false) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+        setValidated(true);
         if (years.trim() === '' || quit.trim() === '' ||
             products.trim() === '' || money.trim() === '' || prescription.trim() === '' || story.trim() === '' || words.trim() === '') {
             setError(true)
@@ -68,8 +57,10 @@ const SmokerSubmission = ({setDataSmokerSub, smokerSub, setSmokerAnswers, dataSm
         <div hidden={smokerSub} className={'container'} style={{justifyContent: 'center', display: 'flex'}}>
             <div style={{maxWidth: '700px', width: '100%'}}>
                 <h2>Create a Submission </h2>
-                {error ? <p className='alerta-error'>Todos los campos son olbigatorios</p> : null}
-                <Form>
+                {error ? <Alert variant={'danger'}>
+                    All fields are required!
+                </Alert> : null}
+                <Form noValidate validated={validated}>
                     <Form.Group controlId="years">
                         <Form.Label>1) How many years did you smoke?</Form.Label>
                         <Form.Control
@@ -77,6 +68,7 @@ const SmokerSubmission = ({setDataSmokerSub, smokerSub, setSmokerAnswers, dataSm
                             placeholder="Choose..."
                             name="years"
                             onChange={handleText}
+                            required
                         />
                     </Form.Group>
                     <Form.Group controlId="quit">
@@ -86,31 +78,73 @@ const SmokerSubmission = ({setDataSmokerSub, smokerSub, setSmokerAnswers, dataSm
                             placeholder="Choose..."
                             name="quit"
                             onChange={handleText}
+                            required
                         />
                     </Form.Group>
                     <Form.Group controlId="products">
                         <Form.Label>3) Which Products Have You Used To Try To Quit Smoking (tick all that
                             apply):</Form.Label>
-                        <Form.Check aria-label="Checkbox for following text input" name="products"
-                                    onChange={handleChange} value={'Prescription Medicine (eg Champix)'}/>Prescription
-                        Medicine (eg
-                        Champix)
-                        <Form.Check aria-label="Checkbox for following text input" name="products"
-                                    onChange={handleChange} value={'Cold Turkey'}/>Cold Turkey
-                        <Form.Check aria-label="Checkbox for following text input" name="products"
-                                    onChange={handleChange} value={'Nicotine Patches'}/> Nicotine Patches
-                        <Form.Check aria-label="Checkbox for following text input" name="products"
-                                    onChange={handleChange} value={'Nicotine Gum'}/> Nicotine Gum
-                        <Form.Check aria-label="Checkbox for following text input" name="products"
-                                    onChange={handleChange} value={'CNicotine Sprays'}/> Nicotine Sprays
-                        <Form.Check aria-label="Checkbox for following text input" name="products"
-                                    onChange={handleChange} value={'Nicotine Lozenges'}/> Nicotine Lozenges
-                        <Form.Check aria-label="Checkbox for following text input" name="products"
-                                    onChange={handleChange} value={'Hypnotherapy'}/> Hypnotherapy
-                        <Form.Check aria-label="Checkbox for following text input" name="products"
-                                    onChange={handleChange} value={'Acupuncture'}/> Acupuncture
-                        <Form.Check aria-label="Checkbox for following text input" name="products"
-                                    onChange={handleChange} value={'Mobile App'}/> Mobile App
+                        <Form.Check
+                            style={{padding: '3px'}}
+                            label={'Prescription Medicine (eg Champix)'}
+                            name="products"
+                            onChange={handleChange}
+                            value={'Prescription Medicine (eg Champix)'}/>
+                        <Form.Check
+                            style={{padding: '3px'}}
+                            name="products"
+                            onChange={handleChange}
+                            label={"Cold Turkey"}
+                            value={'Cold Turkey'}
+                        />
+                        <Form.Check
+                            name="products"
+                            onChange={handleChange}
+                            value={'Nicotine Patches'}
+                            label={" Nicotine Patches"}
+                            style={{padding: '3px'}}
+                        />
+                        <Form.Check
+                            name="products"
+                            onChange={handleChange}
+                            value={'Nicotine Gum'}
+                            label={"Nicotine Gum"}
+                            style={{padding: '3px'}}
+                        />
+                        <Form.Check
+                            name="products"
+                            onChange={handleChange}
+                            value={'Nicotine Sprays'}
+                            label={'Nicotine Sprays'}
+                            style={{padding: '3px'}}
+                        />
+                        <Form.Check
+                            name="products"
+                            onChange={handleChange}
+                            value={'Nicotine Lozenges'}
+                            label={'Nicotine Lozenges'}
+                            style={{padding: '3px'}}
+                        />
+                        <Form.Check
+                            name="products"
+                            onChange={handleChange}
+                            value={'Hypnotherapy'}
+                            label={'Hypnotherapy'}
+                            style={{padding: '3px'}}
+                        />
+                        <Form.Check
+                            name="products"
+                            onChange={handleChange}
+                            value={'Acupuncture'}
+                            label={'Acupuncture'}
+                            style={{padding: '3px'}}
+                        />
+                        <Form.Check
+                            name="products"
+                            onChange={handleChange}
+                            value={'Mobile App'}
+                            label={'Mobile App'}
+                            style={{padding: '3px'}}/>
                     </Form.Group>
                     <Form.Group controlId="money">
                         <Form.Label> 4) How much money did you save on a yearly basis by switching to
@@ -120,6 +154,7 @@ const SmokerSubmission = ({setDataSmokerSub, smokerSub, setSmokerAnswers, dataSm
                             name="money"
                             onChange={handleText}
                             placeholer={'Choose...'}
+                            required
                         >
                             <option>$0 - $2500</option>
                             <option>$2501 - $5000</option>
@@ -139,19 +174,31 @@ const SmokerSubmission = ({setDataSmokerSub, smokerSub, setSmokerAnswers, dataSm
                             and get it filled by a pharmacy. This could require severalx trips to the GP a year
                             and limited availability of nicotine options.
                         </Form.Text>
-                        <Form.Check type={'radio'} name="prescription" onChange={handleText} value={'Yes'}
-                                    aria-label="Checkbox for following text input"/> Yes
-                        <Form.Check type={'radio'} name="prescription" onChange={handleText} value={'No'}
-                                    aria-label="Checkbox for following text input"/> No
+                        <Form.Check
+                            type={'radio'}
+                            name="prescription"
+                            onChange={handleText}
+                            value={'Yes'}
+                            label={'Yes'}
+                        />
+                        <Form.Check
+                            type={'radio'}
+                            name="prescription"
+                            onChange={handleText}
+                            value={'No'}
+                            label={'No'}
+                        />
                     </Form.Group>
                     <Form.Group controlId="story">
                         <Form.Label>6) In detail, please write your personal quit story: </Form.Label>
-                        <Form.Control as="textarea" value={story} name={'story'} onChange={handleText} rows={3}/>
+                        <Form.Control required as="textarea" value={story} name={'story'} onChange={handleText}
+                                      rows={3}/>
                     </Form.Group>
                     <Form.Group controlId="words">
                         <Form.Label>7) In 10 words or more, what would you do if vaping was regulated as a prescription
                             only product. </Form.Label>
-                        <Form.Control as="textarea" onChange={handleText} value={words} name={'words'} rows={3}/>
+                        <Form.Control required as="textarea" onChange={handleText} value={words} name={'words'}
+                                      rows={3}/>
                     </Form.Group>
                     <Button
                         onClick={click}
