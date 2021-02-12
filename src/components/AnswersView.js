@@ -14,7 +14,7 @@ const AnswersView = ({noSmokerAnswers, dataNoSmokerSub, user, setShowThankYou, s
         setHidden(true)
         setNoSmokerAnswers(true)
         console.log(map)
-        await axios.post(`http://localhost:8080/send-email`, map).then((resultOk) => {
+        await axios.post(`https://sendemail-service.herokuapp.com/send-email`, map).then((resultOk) => {
         })
     }
     return (
