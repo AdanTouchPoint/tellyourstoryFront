@@ -23,7 +23,6 @@ function App() {
         smoker: ''
     });
     const [dataNoSmokerSub, setDataNoSmokerSub] = useState({
-        close: '',
         prescription: '',
         story: '',
         id: ''
@@ -31,13 +30,13 @@ function App() {
     const [dataSmokerSub, setDataSmokerSub] = useState({
         years: '',
         quit: '',
-        products: "",
         money: '',
         prescription: '',
         story: '',
         words: '',
         id: ''
     });
+    const [allDataIn, setAllDataIn] = useState([])
     const [hidden, setHidden] = useState(true)
     const [smokerSub, setSmokerSub] = useState(true)
     const [noSmokerSub, setNoSmokerSub] = useState(true)
@@ -74,6 +73,8 @@ function App() {
                 dataSmokerSub={dataSmokerSub}
                 setDataSmokerSub={setDataSmokerSub}
                 setSmokerAnswers={setSmokerAnswers}
+                setAllDataIn={setAllDataIn}
+                allDataIn={allDataIn}
             />
             <NoSmokerSubmission
                 user={user}
@@ -81,6 +82,8 @@ function App() {
                 setDataNoSmokerSub={setDataNoSmokerSub}
                 dataNoSmokerSub={dataNoSmokerSub}
                 setNoSmokerAnswers={setNoSmokerAnswers}
+                setAllDataIn={setAllDataIn}
+                allDataIn={allDataIn}
             />
             <AnswersViewSmoker
                 user={user}
@@ -90,6 +93,8 @@ function App() {
                 setSmokerSub={setSmokerSub}
                 setHidden={setHidden}
                 setSmokerAnswers={setSmokerAnswers}
+                setAllDataIn={setAllDataIn}
+                allDataIn={allDataIn}
             />
             <AnswersView
                 user={user}
@@ -99,6 +104,8 @@ function App() {
                 setNoSmokerSub={setNoSmokerSub}
                 setHidden={setHidden}
                 setNoSmokerAnswers={setNoSmokerAnswers}
+                setAllDataIn={setAllDataIn}
+                allDataIn={allDataIn}
             />
             <ThankYou
                 showThankYou={showThankYou}/>

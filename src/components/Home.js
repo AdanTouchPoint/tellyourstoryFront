@@ -3,6 +3,7 @@ import Button from "react-bootstrap/cjs/Button";
 import Container from "react-bootstrap/cjs/Container";
 import Row from "react-bootstrap/cjs/Row";
 import Col from "react-bootstrap/cjs/Col";
+import { Link, animateScroll as scroll } from "react-scroll";
 
 const Home = ({user, setUser,hidden, setHidden}) => {
     const handleClick = e => {
@@ -12,6 +13,7 @@ const Home = ({user, setUser,hidden, setHidden}) => {
         })
         setHidden( false
          )
+        scroll.scrollToBottom();
         console.log(e.target.value)
         console.log(user)
         console.log(hidden)
@@ -21,6 +23,16 @@ const Home = ({user, setUser,hidden, setHidden}) => {
             <Container className={"containerText"}>
                 <Row>
                     <Col>
+                        <Link
+                            activeClass="active"
+                            to="section1"
+                            spy={true}
+                            smooth={true}
+                            offset={100}
+                            duration={500}
+                        >
+
+                        </Link>
                         <h2> Using this platform you can write and send your submission to the Select Committee on
                             Tobacco Harm
                             Reduction. Make your voice heard!</h2>

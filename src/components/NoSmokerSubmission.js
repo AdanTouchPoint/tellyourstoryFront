@@ -2,29 +2,232 @@ import React, {Fragment, useEffect, useState} from 'react';
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/cjs/Button";
 import Alert from "react-bootstrap/Alert";
+import {Link, animateScroll as scroll} from "react-scroll";
 
 const cryptoRandomString = require("crypto-random-string");
 
-const NoSmokerSubmission = ({noSmokerSub, setDataNoSmokerSub, dataNoSmokerSub, setNoSmokerAnswers}) => {
+const NoSmokerSubmission = ({setAllDataIn, noSmokerSub, setDataNoSmokerSub, dataNoSmokerSub, setNoSmokerAnswers}) => {
     const [validated, setValidated] = useState(false);
     const randomId = cryptoRandomString({type: 'distinguishable', length: 10})
     dataNoSmokerSub.id = randomId;
     const [error, setError] = useState(false)
-    const [closeRelatives, setCloseRelatives] = useState([])
+    const [firstCheckBoxData, setFirstCheckBoxData] = useState([])
+    const [secondCheckBoxData, setSecondCheckBoxData] = useState([])
+    const [thirdCheckBoxData, setThirdCheckBoxData] = useState([])
+    const [fourthCheckBoxData, setFourthCheckBoxData] = useState([])
+    const [fifthCheckBoxData, setFifthCheckBoxData] = useState([])
+    const [sixCheckBoxData, setSixCheckBoxData] = useState([])
+    const [sevenCheckBoxData, setSevenCheckBoxData] = useState([])
+    const [eightCheckBoxData, setEightCheckBoxData] = useState([])
+    const [nineCheckBoxData, setNineCheckBoxData] = useState([])
+    const [thenCheckBoxData, setThenCheckBoxBoxData] = useState([])
+    const [eleventCheckBoxData, setEleventCheckBoxData] = useState([])
+    const [twelfthCheckBoxData, setTwelfthCheckBoxData] = useState([])
+    const [thirteenthCheckBoxData, setThirteenthCheckBoxData] = useState([])
+    const [fourteenthCheckBoxData, setFourteenthCheckBoxData] = useState([])
+    const [fifteenthCheckBoxData, setFifteenthCheckBoxData] = useState([])
+    const [sixteenthCheckBoxData, setSixteenthCheckBoxData] = useState([])
+
     const [radiosData, setRadiosData] = useState([])
-    const handleChange = e => {
-        setCloseRelatives([
-            ...closeRelatives,
-            e.target.value
-        ])
-        setDataNoSmokerSub({
-            ...dataNoSmokerSub,
-            [e.target.name]: [
-                ...closeRelatives,
-                e.target.value].join(',')
-        })
+
+    const firstCheckBox = e => {
         console.log(e.target.value)
+        if (e.target.checked === true) {
+            console.log('HERE!')
+            setFirstCheckBoxData([
+                e.target.value
+            ])
+        } else {
+            console.log('HEREFalse!')
+            setFirstCheckBoxData([])
+            console.log(firstCheckBoxData)
+        }
     }
+    const secondCheckBox = e => {
+        console.log(e.target.value)
+        if (e.target.checked === true) {
+            console.log('HERE!')
+            setSecondCheckBoxData([
+                e.target.value
+            ])
+        } else {
+            console.log('HEREFalse!')
+            setSecondCheckBoxData([])
+            console.log(secondCheckBoxData)
+        }
+    }
+    const thirdCheckBox = e => {
+        console.log(e.target.value)
+        if (e.target.checked === true) {
+            console.log('HERE!')
+            setThirdCheckBoxData([
+                e.target.value
+            ])
+        } else {
+            console.log('HEREFalse!')
+            setThirdCheckBoxData([])
+        }
+    }
+    const fourthCheckBox = e => {
+        console.log(e.target.value)
+        if (e.target.checked === true) {
+            console.log('HERE!')
+            setFourthCheckBoxData([
+                e.target.value
+            ])
+        } else {
+            console.log('HEREFalse!')
+            setFourthCheckBoxData([])
+
+        }
+    }
+    const fifthCheckBox = e => {
+        console.log(e.target.value)
+        if (e.target.checked === true) {
+            console.log('HERE!')
+            setFifthCheckBoxData([
+                e.target.value
+            ])
+        } else {
+            console.log('HEREFalse!')
+            setFifthCheckBoxData([])
+
+        }
+    }
+    const sixCheckBox = e => {
+        console.log(e.target.value)
+        if (e.target.checked === true) {
+            console.log('HERE!')
+            setSixCheckBoxData([
+                e.target.value
+            ])
+        } else {
+            console.log('HEREFalse!')
+            setSixCheckBoxData([])
+        }
+    }
+    const sevenCheckBox = e => {
+        console.log(e.target.value)
+        if (e.target.checked === true) {
+            console.log('HERE!')
+            setSevenCheckBoxData([
+                e.target.value
+            ])
+        } else {
+            console.log('HEREFalse!')
+            setSevenCheckBoxData([])
+
+        }
+    }
+    const eightCheckBox = e => {
+        console.log(e.target.value)
+        if (e.target.checked === true) {
+            console.log('HERE!')
+            setEightCheckBoxData([
+                e.target.value
+            ])
+        } else {
+            console.log('HEREFalse!')
+            setEightCheckBoxData([])
+        }
+    }
+    const nineCheckBox = e => {
+        console.log(e.target.value)
+        if (e.target.checked === true) {
+            console.log('HERE!')
+            setNineCheckBoxData([
+                e.target.value
+            ])
+        } else {
+            console.log('HEREFalse!')
+            setNineCheckBoxData([])
+        }
+    }
+    const thenCheckBox = e => {
+        console.log(e.target.value)
+        if (e.target.checked === true) {
+            console.log('HERE!')
+            setThenCheckBoxBoxData([
+                e.target.value
+            ])
+        } else {
+            console.log('HEREFalse!')
+            setThenCheckBoxBoxData([])
+        }
+    }
+    const eleventCheckBox = e => {
+        console.log(e.target.value)
+        if (e.target.checked === true) {
+            console.log('HERE!')
+            setEleventCheckBoxData([
+                e.target.value
+            ])
+        } else {
+            console.log('HEREFalse!')
+            setEleventCheckBoxData([])
+        }
+    }
+    const twelfthCheckBox = e => {
+        console.log(e.target.value)
+        if (e.target.checked === true) {
+            console.log('HERE!')
+            setTwelfthCheckBoxData([
+                e.target.value
+            ])
+        } else {
+            console.log('HEREFalse!')
+            setTwelfthCheckBoxData([])
+        }
+    }
+    const thirteenthCheckBox = e => {
+        console.log(e.target.value)
+        if (e.target.checked === true) {
+            console.log('HERE!')
+            setThirteenthCheckBoxData([
+                e.target.value
+            ])
+        } else {
+            console.log('HEREFalse!')
+            setThirteenthCheckBoxData([])
+        }
+    }
+    const fourteenthCheckBox = e => {
+        console.log(e.target.value)
+        if (e.target.checked === true) {
+            console.log('HERE!')
+            setFourteenthCheckBoxData([
+                e.target.value
+            ])
+        } else {
+            console.log('HEREFalse!')
+            setFourteenthCheckBoxData([])
+        }
+    }
+    const fifteenthCheckBox = e => {
+        console.log(e.target.value)
+        if (e.target.checked === true) {
+            console.log('HERE!')
+            setFifteenthCheckBoxData([
+                e.target.value
+            ])
+        } else {
+            console.log('HEREFalse!')
+            setFifteenthCheckBoxData([])
+        }
+    }
+    const sixteenthCheckBox = e => {
+        console.log(e.target.value)
+        if (e.target.checked === true) {
+            console.log('HERE!')
+            setSixteenthCheckBoxData([
+                e.target.value
+            ])
+        } else {
+            console.log('HEREFalse!')
+            setSixteenthCheckBoxData([])
+        }
+    }
+
     const handleRadios = e => {
         setRadiosData([
             ...radiosData,
@@ -45,11 +248,32 @@ const NoSmokerSubmission = ({noSmokerSub, setDataNoSmokerSub, dataNoSmokerSub, s
         })
         console.log(e.target.value)
     }
+    const data = async () => {
+        await setAllDataIn([
+            ...firstCheckBoxData,
+            ...secondCheckBoxData,
+            ...thirdCheckBoxData,
+            ...fourthCheckBoxData,
+            ...fifthCheckBoxData,
+            ...sixCheckBoxData,
+            ...sevenCheckBoxData,
+            ...eightCheckBoxData,
+            ...nineCheckBoxData,
+            ...thenCheckBoxData,
+            ...eleventCheckBoxData,
+            ...twelfthCheckBoxData,
+            ...thirteenthCheckBoxData,
+            ...fourteenthCheckBoxData,
+            ...fifteenthCheckBoxData,
+            ...sixteenthCheckBoxData,
+        ])
+    }
     useEffect(() => {
         console.log(dataNoSmokerSub)
     }, [dataNoSmokerSub])
-    const {close, prescription, story} = dataNoSmokerSub;
+    const {prescription, story} = dataNoSmokerSub;
     const click = e => {
+        data().then()
         e.preventDefault();
         const form = e.currentTarget;
         if (form.checkValidity() === false) {
@@ -57,13 +281,13 @@ const NoSmokerSubmission = ({noSmokerSub, setDataNoSmokerSub, dataNoSmokerSub, s
             e.stopPropagation();
         }
         setValidated(true);
-        if (close.trim() === '' || prescription.trim() === '' || story.trim() === '') {
+        if (prescription.trim() === '' || story.trim() === '') {
             setError(true)
             return
         }
         setError(false)
-        console.log(dataNoSmokerSub)
         setNoSmokerAnswers(false)
+        scroll.scrollToBottom();
     }
     return (
         <div hidden={noSmokerSub} className={'container'} style={{justifyContent: 'center', display: 'flex'}}>
@@ -72,28 +296,52 @@ const NoSmokerSubmission = ({noSmokerSub, setDataNoSmokerSub, dataNoSmokerSub, s
                 {error ? <Alert variant={'danger'}>
                     All fields are required!
                 </Alert> : null}
+                <Link
+                    activeClass="active"
+                    to="section1"
+                    spy={true}
+                    smooth={true}
+                    offset={-70}
+                    duration={500}
+                >
+                </Link>
                 <Form noValidate validated={validated}>
                     <Form.Group controlId="close">
                         <Form.Label>1) Who close to you has quit smoking by switching to vaping? (tick all that
                             apply):</Form.Label>
                         <Form.Check
-                            name="close" onChange={handleChange} value={' Husband'} label={' Husband'} style={{padding:'3px'}}/>
-                        <Form.Check name="close" onChange={handleChange} value={' Wife'} label={' Wife'} style={{padding:'3px'}}/>
-                        <Form.Check name="close" onChange={handleChange} value={' Daughter'} label={' Daughter'} style={{padding:'3px'}}/>
-                        <Form.Check name="close" onChange={handleChange} value={' Mother'} label={' Mother'} style={{padding:'3px'}}/>
-                        <Form.Check name="close" onChange={handleChange} value={' Father'} label={' Father'} style={{padding:'3px'}}/>
-                        <Form.Check name="close" onChange={handleChange} value={' Son'} label={' Son'} style={{padding:'3px'}}/>
-                        <Form.Check name="close" onChange={handleChange} value={' Grandmother'} label={' Grandmother'} style={{padding:'3px'}}/>
-                        <Form.Check name="close" onChange={handleChange} value={' Grandfather'} label={' Grandfather'} style={{padding:'3px'}}/>
-                        <Form.Check name="close" onChange={handleChange} value={' Aunt'} label={' Aunt'} style={{padding:'3px'}} />
-                        <Form.Check name="close" onChange={handleChange} value={' Uncle'} label={' Uncle'} style={{padding:'3px'}}/>
-                        <Form.Check name="close" onChange={handleChange} value={' Cousin'} label={' Cousin'} style={{padding:'3px'}}/>
-                        <Form.Check name="close" onChange={handleChange} value={' Niece'} label={' Niece'} style={{padding:'3px'}}/>
-                        <Form.Check name="close" onChange={handleChange} value={' Nephew'} label={' Nephew'} style={{padding:'3px'}}/>
-                        <Form.Check name="close" onChange={handleChange} value={' Neighbour'} label={' Neighbour'} style={{padding:'3px'}}/>
-                        <Form.Check name="close" onChange={handleChange} value={' Friend'} label={' Friend'} style={{padding:'3px'}}/>
-                        <Form.Check name="close" onChange={handleChange} value={' Mentor'} label={' Mentor'} style={{padding:'3px'}}/>
-                        <Form.Check name="close" onChange={handleChange} value={' Mentee'} label={' Mentee'} style={{padding:'3px'}}/>
+                            name="close" onClick={firstCheckBox} value={' Husband'} label={' Husband'}
+                            style={{padding: '3px'}}/>
+                        <Form.Check name="close" onClick={secondCheckBox} value={' Wife'} label={' Wife'}
+                                    style={{padding: '3px'}}/>
+                        <Form.Check name="close" onClick={thirdCheckBox} value={' Daughter'} label={' Daughter'}
+                                    style={{padding: '3px'}}/>
+                        <Form.Check name="close" onClick={fourthCheckBox} value={' Mother'} label={' Mother'}
+                                    style={{padding: '3px'}}/>
+                        <Form.Check name="close" onClick={fifthCheckBox} value={' Father'} label={' Father'}
+                                    style={{padding: '3px'}}/>
+                        <Form.Check name="close" onClick={sixCheckBox} value={' Son'} label={' Son'}
+                                    style={{padding: '3px'}}/>
+                        <Form.Check name="close" onClick={sevenCheckBox} value={' Grandmother'} label={' Grandmother'}
+                                    style={{padding: '3px'}}/>
+                        <Form.Check name="close" onClick={eightCheckBox} value={' Grandfather'} label={' Grandfather'}
+                                    style={{padding: '3px'}}/>
+                        <Form.Check name="close" onClick={nineCheckBox} value={' Aunt'} label={' Aunt'}
+                                    style={{padding: '3px'}}/>
+                        <Form.Check name="close" onClick={thenCheckBox} value={' Uncle'} label={' Uncle'}
+                                    style={{padding: '3px'}}/>
+                        <Form.Check name="close" onClick={eleventCheckBox} value={' Cousin'} label={' Cousin'}
+                                    style={{padding: '3px'}}/>
+                        <Form.Check name="close" onClick={twelfthCheckBox} value={' Nephew'} label={' Nephew'}
+                                    style={{padding: '3px'}}/>
+                        <Form.Check name="close" onClick={thirteenthCheckBox} value={' Neighbour'} label={' Neighbour'}
+                                    style={{padding: '3px'}}/>
+                        <Form.Check name="close" onClick={fourteenthCheckBox} value={' Friend'} label={' Friend'}
+                                    style={{padding: '3px'}}/>
+                        <Form.Check name="close" onClick={fifteenthCheckBox} value={' Mentor'} label={' Mentor'}
+                                    style={{padding: '3px'}}/>
+                        <Form.Check name="close" onClick={sixteenthCheckBox} value={' Mentee'} label={' Mentee'}
+                                    style={{padding: '3px'}}/>
                     </Form.Group>
                     <Form.Group controlId="prescription">
                         <Form.Label>2) Do You Support a Prescription-Only Model to Obtain Liquid
@@ -103,7 +351,8 @@ const NoSmokerSubmission = ({noSmokerSub, setDataNoSmokerSub, dataNoSmokerSub, s
                             and get it filled by a pharmacy. This could require several trips to the GP a year
                             and limited availability of nicotine options.
                         </Form.Text>
-                        <Form.Check type={'radio'} name="prescription" onChange={handleRadios} value={'Yes'} label={'Yes'}
+                        <Form.Check type={'radio'} name="prescription" onChange={handleRadios} value={'Yes'}
+                                    label={'Yes'}
                                     aria-label="Checkbox for following text input"/>
                         <Form.Check type={'radio'} name="prescription" onChange={handleRadios} value={'No'} label={'No'}
                                     aria-label="Checkbox for following text input"/>

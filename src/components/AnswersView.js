@@ -3,18 +3,18 @@ import Button from "react-bootstrap/cjs/Button";
 import Card from "react-bootstrap/Card";
 import axios from 'axios'
 
-const AnswersView = ({noSmokerAnswers, dataNoSmokerSub, user, setShowThankYou, setNoSmokerSub, setHidden, setNoSmokerAnswers}) => {
-    const {story, prescription, close} = dataNoSmokerSub
+const AnswersView = ({allDataIn,noSmokerAnswers, dataNoSmokerSub, user, setShowThankYou, setNoSmokerSub, setHidden, setNoSmokerAnswers}) => {
+    const {story, prescription} = dataNoSmokerSub
     const {submissionType, name, lastName, age, city, state, cp, email, smoker} = user;
-    const map = Object.assign(user, dataNoSmokerSub)
+    const formData = Object.assign(user, dataNoSmokerSub)
     const click = async e => {
         e.preventDefault();
         setShowThankYou(false)
         setNoSmokerSub(true)
         setHidden(true)
         setNoSmokerAnswers(true)
-        console.log(map)
-        await axios.post(`https://sendemail-service.herokuapp.com/send-email`, map).then((resultOk) => {
+        console.log(formData)
+        await axios.post(`https://sendemail-service.herokuapp.com/send-email`, {formData,allDataIn}).then((resultOk) => {
         })
     }
     return (
@@ -46,7 +46,10 @@ const AnswersView = ({noSmokerAnswers, dataNoSmokerSub, user, setShowThankYou, s
                         This submission is {submissionType}.
                         Thank you for the opportunity to provide a submission on this critical issue.
                         My name is {name} {lastName} from {city} {state}. My:
-                        {close}
+                       <p>
+                           {allDataIn.map( (product,index)  =>   <li key={index}>{product}</li>)}
+                           {console.log(allDataIn)}
+                       </p>
                         quit smoking by switching to vaping.
                         I {prescription} support a prescription-only model to obtain liquid nicotine
                         The reason I support Vaping is below

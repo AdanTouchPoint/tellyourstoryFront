@@ -2,64 +2,199 @@ import React, {useEffect, useState} from 'react';
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/cjs/Button";
 import Alert from 'react-bootstrap/Alert'
+import {Link, animateScroll as scroll} from "react-scroll";
 
 const cryptoRandomString = require("crypto-random-string");
 
-const SmokerSubmission = ({setDataSmokerSub, smokerSub, setSmokerAnswers, dataSmokerSub}) => {
+const SmokerSubmission = ({setDataSmokerSub, allDataIn, setAllDataIn, smokerSub, setSmokerAnswers, dataSmokerSub}) => {
     const [validated, setValidated] = useState(false)
     const randomId = cryptoRandomString({type: 'distinguishable', length: 10})
     dataSmokerSub.id = randomId;
-    const [productsData, setProductsData] = useState([])
+    const [firstCheckBoxData, setFirstCheckBoxData] = useState([])
+    const [secondCheckBoxData, setSecondCheckBoxData] = useState([])
+    const [thirdCheckBoxData, setThirdCheckBoxData] = useState([])
+    const [fourthCheckBoxData, setFourthCheckBoxData] = useState([])
+    const [fifthCheckBoxData, setFifthCheckBoxData] = useState([])
+    const [sixCheckBoxData, setSixCheckBoxData] = useState([])
+    const [sevenCheckBoxData, setSevenCheckBoxData] = useState([])
+    const [eightCheckBoxData, setEightCheckBoxData] = useState([])
+    const [nineCheckBoxData, setNineCheckBoxData] = useState([])
     const [error, setError] = useState(false)
-    const handleChange = e => {
-        setProductsData([
-            ...productsData,
-            e.target.value
-        ])
-        setDataSmokerSub({
-            ...dataSmokerSub,
-            [e.target.name]: [
-                ...productsData,
-                e.target.value].join(',')
-        })
+    const firstCheckBox = e => {
         console.log(e.target.value)
+        if (e.target.checked === true) {
+            console.log('HERE!')
+            setFirstCheckBoxData([
+                e.target.value
+            ])
+        } else {
+            console.log('HEREFalse!')
+            setFirstCheckBoxData([])
+            console.log(firstCheckBoxData)
+        }
+    }
+    const secondCheckBox = e => {
+        console.log(e.target.value)
+        if (e.target.checked === true) {
+            console.log('HERE!')
+            setSecondCheckBoxData([
+                e.target.value
+            ])
+        } else {
+            console.log('HEREFalse!')
+            setSecondCheckBoxData([])
+            console.log(secondCheckBoxData)
+        }
+    }
+    const thirdCheckBox = e => {
+        console.log(e.target.value)
+        if (e.target.checked === true) {
+            console.log('HERE!')
+            setThirdCheckBoxData([
+                e.target.value
+            ])
+        } else {
+            console.log('HEREFalse!')
+            setThirdCheckBoxData([])
+        }
+    }
+    const fourthCheckBox = e => {
+        console.log(e.target.value)
+        if (e.target.checked === true) {
+            console.log('HERE!')
+            setFourthCheckBoxData([
+                e.target.value
+            ])
+        } else {
+            console.log('HEREFalse!')
+            setFourthCheckBoxData([])
+
+        }
+    }
+    const fifthCheckBox = e => {
+        console.log(e.target.value)
+        if (e.target.checked === true) {
+            console.log('HERE!')
+            setFifthCheckBoxData([
+                e.target.value
+            ])
+        } else {
+            console.log('HEREFalse!')
+            setFifthCheckBoxData([])
+
+        }
+    }
+    const sixCheckBox = e => {
+        console.log(e.target.value)
+        if (e.target.checked === true) {
+            console.log('HERE!')
+            setSixCheckBoxData([
+                e.target.value
+            ])
+        } else {
+            console.log('HEREFalse!')
+            setSixCheckBoxData([])
+        }
+    }
+    const sevenCheckBox = e => {
+        console.log(e.target.value)
+        if (e.target.checked === true) {
+            console.log('HERE!')
+            setSevenCheckBoxData([
+                e.target.value
+            ])
+        } else {
+            console.log('HEREFalse!')
+            setSevenCheckBoxData([])
+
+        }
+    }
+    const eightCheckBox = e => {
+        console.log(e.target.value)
+        if (e.target.checked === true) {
+            console.log('HERE!')
+            setEightCheckBoxData([
+                e.target.value
+            ])
+        } else {
+            console.log('HEREFalse!')
+            setEightCheckBoxData([])
+        }
+    }
+    const nineCheckBox = e => {
+        console.log(e.target.value)
+        if (e.target.checked === true) {
+            console.log('HERE!')
+            setNineCheckBoxData([
+                e.target.value
+            ])
+        } else {
+            console.log('HEREFalse!')
+            setNineCheckBoxData([])
+        }
     }
     const handleText = e => {
+        e.preventDefault();
         setDataSmokerSub({
             ...dataSmokerSub,
             [e.target.name]: e.target.value
         })
         console.log(e.target.value)
     }
-    useEffect(() => {
-        console.log(dataSmokerSub)
-    }, [dataSmokerSub])
-    const {years, quit, products, money, prescription, story, words} = dataSmokerSub;
+    const data = async () => {
+        await setAllDataIn([
+            ...firstCheckBoxData,
+            ...secondCheckBoxData,
+            ...thirdCheckBoxData,
+            ...fourthCheckBoxData,
+            ...fifthCheckBoxData,
+            ...sixCheckBoxData,
+            ...sevenCheckBoxData,
+            ...eightCheckBoxData,
+            ...nineCheckBoxData
+        ])
+    }
+    const {years, quit, money, prescription, story, words} = dataSmokerSub;
     const click = e => {
-        e.preventDefault();
+        data().then()
         const form = e.currentTarget;
         if (form.checkValidity() === false) {
             e.preventDefault();
             e.stopPropagation();
         }
+
         setValidated(true);
         if (years.trim() === '' || quit.trim() === '' ||
-            products.trim() === '' || money.trim() === '' || prescription.trim() === '' || story.trim() === '' || words.trim() === '') {
+             money.trim() === '' || prescription.trim() === '' || story.trim() === '' || words.trim() === '') {
             setError(true)
             return
         }
         setError(false)
         setSmokerAnswers(false)
-        console.log(dataSmokerSub)
-
+        scroll.scrollToBottom();
     }
+    useEffect(() => {
+        console.log(secondCheckBoxData)
+    }, [secondCheckBoxData])
+    useEffect(() => {
+        console.log(allDataIn)
+    }, [allDataIn])
     return (
-        <div hidden={smokerSub} className={'container'} style={{justifyContent: 'center', display: 'flex'}}>
+        <div  hidden={smokerSub} className={'container'} style={{justifyContent: 'center', display: 'flex'}}>
             <div style={{maxWidth: '700px', width: '100%'}}>
                 <h2>Create a Submission </h2>
                 {error ? <Alert variant={'danger'}>
                     All fields are required!
                 </Alert> : null}
+                <Link
+                    activeClass="active"
+                    to="section1"
+                    spy={true}
+                    smooth={true}
+                    offset={-70}
+                    duration={500}
+                >
+                </Link>
                 <Form noValidate validated={validated}>
                     <Form.Group controlId="years">
                         <Form.Label>1) How many years did you smoke?</Form.Label>
@@ -81,69 +216,86 @@ const SmokerSubmission = ({setDataSmokerSub, smokerSub, setSmokerAnswers, dataSm
                             required
                         />
                     </Form.Group>
-                    <Form.Group controlId="products">
+                    <Form.Group controlId="champix">
                         <Form.Label>3) Which Products Have You Used To Try To Quit Smoking (tick all that
                             apply):</Form.Label>
                         <Form.Check
                             style={{padding: '3px'}}
                             label={'Prescription Medicine (eg Champix)'}
-                            name="products"
-                            onChange={handleChange}
-                            value={'Prescription Medicine (eg Champix)'}/>
+                            name="champix"
+                            onClick={firstCheckBox}
+                            value={'Prescription Medicine (eg Champix)'}
+                        />
+                    </Form.Group>
+                    <Form.Group controlId={"Cold Turkey"}>
                         <Form.Check
                             style={{padding: '3px'}}
-                            name="products"
-                            onChange={handleChange}
+                            name="Cold Turkey"
+                            onClick={secondCheckBox}
                             label={"Cold Turkey"}
-                            value={'Cold Turkey'}
+                            value={"Cold Turkey"}
                         />
+                    </Form.Group>
+                    <Form.Group controlId={" Nicotine Patches"}>
                         <Form.Check
-                            name="products"
-                            onChange={handleChange}
-                            value={'Nicotine Patches'}
+                            name="Nicotine Patches"
+                            onClick={thirdCheckBox}
+                            value={" Nicotine Patches"}
                             label={" Nicotine Patches"}
                             style={{padding: '3px'}}
                         />
+                    </Form.Group>
+                    <Form.Group controlId={"Nicotine Gum"}>
                         <Form.Check
-                            name="products"
-                            onChange={handleChange}
-                            value={'Nicotine Gum'}
+                            name="Nicotine Gum"
+                            onClick={fourthCheckBox}
+                            value={"Nicotine Gum"}
                             label={"Nicotine Gum"}
                             style={{padding: '3px'}}
                         />
+                    </Form.Group>
+                    <Form.Group controlId={"Nicotine Sprays"}>
                         <Form.Check
-                            name="products"
-                            onChange={handleChange}
-                            value={'Nicotine Sprays'}
-                            label={'Nicotine Sprays'}
+                            name="Nicotine Sprays"
+                            onClick={fifthCheckBox}
+                            value={"Nicotine Sprays"}
+                            label={"Nicotine Sprays"}
                             style={{padding: '3px'}}
                         />
+                    </Form.Group>
+                    <Form.Group controlId={"Nicotine Lozenges"}>
                         <Form.Check
-                            name="products"
-                            onChange={handleChange}
-                            value={'Nicotine Lozenges'}
-                            label={'Nicotine Lozenges'}
+                            name="Nicotine Lozenges"
+                            onClick={sixCheckBox}
+                            value={"Nicotine Lozenges"}
+                            label={"Nicotine Lozenges"}
                             style={{padding: '3px'}}
                         />
+                    </Form.Group>
+                    <Form.Group controlId={"Hypnotherapy"}>
                         <Form.Check
-                            name="products"
-                            onChange={handleChange}
-                            value={'Hypnotherapy'}
-                            label={'Hypnotherapy'}
+                            name="Hypnotherapy"
+                            onClick={sevenCheckBox}
+                            value={"Hypnotherapy"}
+                            label={"Hypnotherapy"}
                             style={{padding: '3px'}}
                         />
+                    </Form.Group>
+                    <Form.Group controlId={"Acupuncture"}>
                         <Form.Check
-                            name="products"
-                            onChange={handleChange}
-                            value={'Acupuncture'}
-                            label={'Acupuncture'}
+                            name="Acupuncture"
+                            onClick={eightCheckBox}
+                            value={"Acupuncture"}
+                            label={"Acupuncture"}
                             style={{padding: '3px'}}
                         />
+                    </Form.Group>
+                    <Form.Group controlId={"Mobile App"}>
                         <Form.Check
-                            name="products"
-                            onChange={handleChange}
-                            value={'Mobile App'}
-                            label={'Mobile App'}
+                            name="Mobile App"
+                            onClick={nineCheckBox}
+                            value={"Mobile App"}
+                            label={"Mobile App"}
                             style={{padding: '3px'}}/>
                     </Form.Group>
                     <Form.Group controlId="money">
@@ -187,6 +339,7 @@ const SmokerSubmission = ({setDataSmokerSub, smokerSub, setSmokerAnswers, dataSm
                             onChange={handleText}
                             value={'No'}
                             label={'No'}
+
                         />
                     </Form.Group>
                     <Form.Group controlId="story">
@@ -201,6 +354,7 @@ const SmokerSubmission = ({setDataSmokerSub, smokerSub, setSmokerAnswers, dataSm
                                       rows={3}/>
                     </Form.Group>
                     <Button
+
                         onClick={click}
                     >
                         Next

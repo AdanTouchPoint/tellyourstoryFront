@@ -3,7 +3,7 @@ import InputGroup from "react-bootstrap/InputGroup";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/cjs/Button";
 import Alert from "react-bootstrap/Alert";
-
+import { Link, animateScroll as scroll } from "react-scroll";
 const cryptoRandomString = require("crypto-random-string");
 
 const RegisterForm = ({user, setUser, hidden, smokerSub, setSmokerSub, setNoSmokerSub}) => {
@@ -37,9 +37,12 @@ const RegisterForm = ({user, setUser, hidden, smokerSub, setSmokerSub, setNoSmok
         console.log(user)
         if (smoker === "1") {
             setSmokerSub(false)
+            scroll.scrollToBottom();
         } else {
             setNoSmokerSub(false)
+            scroll.scrollToBottom();
         }
+
     }
     return (
         <div hidden={hidden} className={'container'} style={{justifyContent: 'center', display: 'flex'}}>
@@ -48,7 +51,16 @@ const RegisterForm = ({user, setUser, hidden, smokerSub, setSmokerSub, setNoSmok
                 {error ? <Alert variant={'danger'} >
                     All fields are required!
                 </Alert> : null}
-                <Form noValidate validated={validated} >
+                <Link
+                    activeClass="active"
+                    to="section1"
+                    spy={true}
+                    smooth={true}
+                    offset={-70}
+                    duration={500}
+                >
+                </Link>
+                <Form  noValidate validated={validated} >
                     <Form.Group controlId="submissionType">
                         <InputGroup className="mb-2" >
                             <InputGroup.Prepend>
@@ -59,6 +71,7 @@ const RegisterForm = ({user, setUser, hidden, smokerSub, setSmokerSub, setNoSmok
                                 name="submissionType"
                                 onChange={handleChange}
                                 required
+
                                 >
                                 <option></option>
                                 <option>Public: the material is published on the internet whit your name </option>
@@ -78,6 +91,7 @@ const RegisterForm = ({user, setUser, hidden, smokerSub, setSmokerSub, setNoSmok
                             name="name"
                             onChange={handleChange}
                             required
+                            autoFocus={true}
                         />
                     </Form.Group>
                     <Form.Group controlId="lastName">
@@ -143,6 +157,7 @@ const RegisterForm = ({user, setUser, hidden, smokerSub, setSmokerSub, setNoSmok
                             name="cp"
                             onChange={handleChange}
                             required
+                            maxLength="4"
                         />
                     </Form.Group>
                     <Form.Group controlId="email">
