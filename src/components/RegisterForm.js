@@ -17,7 +17,7 @@ const RegisterForm = ({user, setUser, hidden, smokerSub, setSmokerSub, setNoSmok
         console.log(e.target.value)
         console.log(user)
     }
-    const {submissionType, name, lastName, age, city, state, cp, email, smoker} = user;
+    const {submissionType, firstName, lastName, age, city, state, zipCode, email, smoker} = user;
     const click = e => {
         e.preventDefault();
         const form = e.currentTarget;
@@ -26,8 +26,8 @@ const RegisterForm = ({user, setUser, hidden, smokerSub, setSmokerSub, setNoSmok
             e.stopPropagation();
         }
         setValidated(true);
-        if (submissionType.trim() === '' || name.trim() === '' || lastName.trim() === '' ||
-            age.trim() === '' || city.trim() === '' || state.trim() === '' || cp.trim() === '' || email.trim() === '') {
+        if (submissionType.trim() === '' || firstName.trim() === '' || lastName.trim() === '' ||
+            age.trim() === '' || city.trim() === '' || state.trim() === '' || zipCode.trim() === '' || email.trim() === '') {
             setError(true)
             return
         }
@@ -88,7 +88,7 @@ const RegisterForm = ({user, setUser, hidden, smokerSub, setSmokerSub, setNoSmok
                         <Form.Control
                             type="text"
                             placeholder="Name"
-                            name="name"
+                            name="firstName"
                             onChange={handleChange}
                             required
                             autoFocus={true}
@@ -154,7 +154,7 @@ const RegisterForm = ({user, setUser, hidden, smokerSub, setSmokerSub, setNoSmok
                         <Form.Control
                             type="text"
                             placeholder="Code Postal"
-                            name="cp"
+                            name="zipCode"
                             onChange={handleChange}
                             required
                             maxLength="4"

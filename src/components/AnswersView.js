@@ -4,17 +4,17 @@ import Card from "react-bootstrap/Card";
 import axios from 'axios'
 
 const AnswersView = ({allDataIn,noSmokerAnswers, dataNoSmokerSub, user, setShowThankYou, setNoSmokerSub, setHidden, setNoSmokerAnswers}) => {
-    const {story, prescription} = dataNoSmokerSub
+    const {personalStory, prescriptionSupport} = dataNoSmokerSub
     const {submissionType, name, lastName, age, city, state, cp, email, smoker} = user;
-    const formData = Object.assign(user, dataNoSmokerSub)
+    // const formData = Object.assign(user, dataNoSmokerSub)
     const click = async e => {
         e.preventDefault();
         setShowThankYou(false)
         setNoSmokerSub(true)
         setHidden(true)
         setNoSmokerAnswers(true)
-        console.log(formData)
-        await axios.post(`https://sendemail-service.herokuapp.com/send-email`, {formData,allDataIn}).then((resultOk) => {
+        console.log(user)
+        await axios.post(`http://localhost:8080/send-email`, {user,allDataIn,dataNoSmokerSub}).then((resultOk) => {
         })
     }
     return (
@@ -46,18 +46,21 @@ const AnswersView = ({allDataIn,noSmokerAnswers, dataNoSmokerSub, user, setShowT
                         This submission is {submissionType}.
                         Thank you for the opportunity to provide a submission on this critical issue.
                         My name is {name} {lastName} from {city} {state}. My:
-                       <p>
+
+                    </p>
+                    <p>
                            {allDataIn.map( (product,index)  =>   <li key={index}>{product}</li>)}
                            {console.log(allDataIn)}
                        </p>
+                    <p>
                         quit smoking by switching to vaping.
-                        I {prescription} support a prescription-only model to obtain liquid nicotine
+                        I {prescriptionSupport} support a prescription-only model to obtain liquid nicotine
                         The reason I support Vaping is below
-                        {story}
+                        {personalStory}
                         Sincerely,
                         {name} {lastName}
-
                     </p>
+
                 </Card>
                 <p>
                     If you are happy with your submission, click "Send Now" below

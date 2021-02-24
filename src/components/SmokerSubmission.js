@@ -6,10 +6,12 @@ import {Link, animateScroll as scroll} from "react-scroll";
 
 const cryptoRandomString = require("crypto-random-string");
 
-const SmokerSubmission = ({setDataSmokerSub, allDataIn, setAllDataIn, smokerSub, setSmokerAnswers, dataSmokerSub}) => {
+const SmokerSubmission = ({user,setDataSmokerSub, allDataIn, setAllDataIn, smokerSub, setSmokerAnswers, dataSmokerSub}) => {
     const [validated, setValidated] = useState(false)
     const randomId = cryptoRandomString({type: 'distinguishable', length: 10})
     dataSmokerSub.id = randomId;
+    dataSmokerSub.userId = user.id
+
     const [firstCheckBoxData, setFirstCheckBoxData] = useState([])
     const [secondCheckBoxData, setSecondCheckBoxData] = useState([])
     const [thirdCheckBoxData, setThirdCheckBoxData] = useState([])
@@ -20,6 +22,7 @@ const SmokerSubmission = ({setDataSmokerSub, allDataIn, setAllDataIn, smokerSub,
     const [eightCheckBoxData, setEightCheckBoxData] = useState([])
     const [nineCheckBoxData, setNineCheckBoxData] = useState([])
     const [error, setError] = useState(false)
+
     const firstCheckBox = e => {
         console.log(e.target.value)
         if (e.target.checked === true) {
@@ -126,8 +129,8 @@ const SmokerSubmission = ({setDataSmokerSub, allDataIn, setAllDataIn, smokerSub,
         if (e.target.checked === true) {
             console.log('HERE!')
             setNineCheckBoxData([
-                e.target.value
-            ])
+                  e.target.value
+        ])
         } else {
             console.log('HEREFalse!')
             setNineCheckBoxData([])
@@ -141,6 +144,7 @@ const SmokerSubmission = ({setDataSmokerSub, allDataIn, setAllDataIn, smokerSub,
         })
         console.log(e.target.value)
     }
+
     const data = async () => {
         await setAllDataIn([
             ...firstCheckBoxData,
@@ -154,9 +158,16 @@ const SmokerSubmission = ({setDataSmokerSub, allDataIn, setAllDataIn, smokerSub,
             ...nineCheckBoxData
         ])
     }
-    const {years, quit, money, prescription, story, words} = dataSmokerSub;
+
+    const {years, tries, money, prescriptionSupport, personalStory, words} = dataSmokerSub;
     const click = e => {
+        e.preventDefault();
         data().then()
+        setDataSmokerSub({
+            ...dataSmokerSub,
+            products: allDataIn.join(',')
+        })
+
         const form = e.currentTarget;
         if (form.checkValidity() === false) {
             e.preventDefault();
@@ -164,21 +175,24 @@ const SmokerSubmission = ({setDataSmokerSub, allDataIn, setAllDataIn, smokerSub,
         }
 
         setValidated(true);
-        if (years.trim() === '' || quit.trim() === '' ||
-             money.trim() === '' || prescription.trim() === '' || story.trim() === '' || words.trim() === '') {
+        if (years.trim() === '' || tries.trim() === '' ||
+             money.trim() === '' || prescriptionSupport.trim() === '' || personalStory.trim() === '' || words.trim() === '') {
             setError(true)
             return
         }
         setError(false)
         setSmokerAnswers(false)
         scroll.scrollToBottom();
+
     }
+
     useEffect(() => {
         console.log(secondCheckBoxData)
     }, [secondCheckBoxData])
     useEffect(() => {
-        console.log(allDataIn)
-    }, [allDataIn])
+        console.log(dataSmokerSub)
+    }, [dataSmokerSub])
+
     return (
         <div  hidden={smokerSub} className={'container'} style={{justifyContent: 'center', display: 'flex'}}>
             <div style={{maxWidth: '700px', width: '100%'}}>
@@ -206,12 +220,12 @@ const SmokerSubmission = ({setDataSmokerSub, allDataIn, setAllDataIn, smokerSub,
                             required
                         />
                     </Form.Group>
-                    <Form.Group controlId="quit">
+                    <Form.Group controlId="tries">
                         <Form.Label>2) How many times did you try to quit smoking?</Form.Label>
                         <Form.Control
                             type="number"
                             placeholder="Choose..."
-                            name="quit"
+                            name="tries"
                             onChange={handleText}
                             required
                         />
@@ -318,7 +332,7 @@ const SmokerSubmission = ({setDataSmokerSub, allDataIn, setAllDataIn, smokerSub,
                         </Form.Control>
 
                     </Form.Group>
-                    <Form.Group controlId="prescription">
+                    <Form.Group controlId="prescriptionSupport">
                         <Form.Label>5) Do You Support a Prescription-Only Model to Obtain Liquid
                             Nicotine?: </Form.Label>
                         <Form.Text>
@@ -328,23 +342,23 @@ const SmokerSubmission = ({setDataSmokerSub, allDataIn, setAllDataIn, smokerSub,
                         </Form.Text>
                         <Form.Check
                             type={'radio'}
-                            name="prescription"
+                            name="prescriptionSupport"
                             onChange={handleText}
                             value={'Yes'}
                             label={'Yes'}
                         />
                         <Form.Check
                             type={'radio'}
-                            name="prescription"
+                            name="prescriptionSupport"
                             onChange={handleText}
                             value={'No'}
                             label={'No'}
 
                         />
                     </Form.Group>
-                    <Form.Group controlId="story">
+                    <Form.Group controlId="personalStory">
                         <Form.Label>6) In detail, please write your personal quit story: </Form.Label>
-                        <Form.Control required as="textarea" value={story} name={'story'} onChange={handleText}
+                        <Form.Control required as="textarea" value={personalStory} name={'personalStory'} onChange={handleText}
                                       rows={3}/>
                     </Form.Group>
                     <Form.Group controlId="words">
@@ -354,7 +368,6 @@ const SmokerSubmission = ({setDataSmokerSub, allDataIn, setAllDataIn, smokerSub,
                                       rows={3}/>
                     </Form.Group>
                     <Button
-
                         onClick={click}
                     >
                         Next

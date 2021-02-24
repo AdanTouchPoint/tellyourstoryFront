@@ -3,19 +3,17 @@ import Button from "react-bootstrap/cjs/Button";
 import Card from "react-bootstrap/Card";
 import axios from "axios";
 
-const AnswersViewSmoker = ({allDataIn, user, dataSmokerSub, smokerAnswers, setShowThankYou, setSmokerAnswers, setHidden, setSmokerSub}) => {
-    const {story, prescription, years, quit, money, words} = dataSmokerSub
+const AnswersViewSmoker = ({allDataIn, user, setDataSmokerSub, dataSmokerSub, smokerAnswers, setShowThankYou, setSmokerAnswers, setHidden, setSmokerSub}) => {
+    const {story, prescription, years, tries, money, words} = dataSmokerSub
     const {submissionType, name, lastName, age, city, state, cp, email, smoker} = user;
-    const formData = Object.assign(user, dataSmokerSub)
-    const click = async e => {
+        const click = async e => {
         e.preventDefault();
         setShowThankYou(false)
         setSmokerSub(true)
         setHidden(true)
         setSmokerAnswers(true)
-        console.log(formData)
-        await axios.post(`https://sendemail-service.herokuapp.com/send-email`, {formData,allDataIn}).then((resultOk) => {
-
+        console.log()
+        await axios.post(`http://localhost:8080/send-email`, {user, dataSmokerSub,allDataIn}).then((resultOk) => {
         })
     }
     return (
@@ -47,10 +45,10 @@ const AnswersViewSmoker = ({allDataIn, user, dataSmokerSub, smokerAnswers, setSh
                         This submission is {submissionType}.
                         Thank you for the opportunity to provide a submission on this critical issue.
                         My name is {name} {lastName} from {city} {state}. I am {age} and i smoked for {years}.
-                        I tried to quit smoking {quit}, using:
+                        I tried to quit smoking {tries}, using:
                     </p>
                     <p>
-                        {allDataIn.map( (product,index)  =>   <li key={index}>{product}</li>)}
+                        {allDataIn.map((product, index) => <li key={index}>{product}</li>)}
                         {console.log(allDataIn)}
                     </p>
                     But Vaping is the only method that worked for me. I have saved between {money} by

@@ -6,10 +6,11 @@ import {Link, animateScroll as scroll} from "react-scroll";
 
 const cryptoRandomString = require("crypto-random-string");
 
-const NoSmokerSubmission = ({setAllDataIn, noSmokerSub, setDataNoSmokerSub, dataNoSmokerSub, setNoSmokerAnswers}) => {
+const NoSmokerSubmission = ({user,setAllDataIn, allDataIn, noSmokerSub, setDataNoSmokerSub, dataNoSmokerSub, setNoSmokerAnswers}) => {
     const [validated, setValidated] = useState(false);
     const randomId = cryptoRandomString({type: 'distinguishable', length: 10})
     dataNoSmokerSub.id = randomId;
+    dataNoSmokerSub.userId = user.id
     const [error, setError] = useState(false)
     const [firstCheckBoxData, setFirstCheckBoxData] = useState([])
     const [secondCheckBoxData, setSecondCheckBoxData] = useState([])
@@ -27,7 +28,6 @@ const NoSmokerSubmission = ({setAllDataIn, noSmokerSub, setDataNoSmokerSub, data
     const [fourteenthCheckBoxData, setFourteenthCheckBoxData] = useState([])
     const [fifteenthCheckBoxData, setFifteenthCheckBoxData] = useState([])
     const [sixteenthCheckBoxData, setSixteenthCheckBoxData] = useState([])
-
     const [radiosData, setRadiosData] = useState([])
 
     const firstCheckBox = e => {
@@ -271,17 +271,22 @@ const NoSmokerSubmission = ({setAllDataIn, noSmokerSub, setDataNoSmokerSub, data
     useEffect(() => {
         console.log(dataNoSmokerSub)
     }, [dataNoSmokerSub])
-    const {prescription, story} = dataNoSmokerSub;
+    const {prescriptionSupport, personalStory} = dataNoSmokerSub;
     const click = e => {
         data().then()
         e.preventDefault();
+        setDataNoSmokerSub({
+            ...dataNoSmokerSub,
+            relatives: allDataIn.join(',')
+        })
+
         const form = e.currentTarget;
         if (form.checkValidity() === false) {
             e.preventDefault();
             e.stopPropagation();
         }
         setValidated(true);
-        if (prescription.trim() === '' || story.trim() === '') {
+        if (prescriptionSupport.trim() === '' || personalStory.trim() === '') {
             setError(true)
             return
         }
@@ -343,7 +348,7 @@ const NoSmokerSubmission = ({setAllDataIn, noSmokerSub, setDataNoSmokerSub, data
                         <Form.Check name="close" onClick={sixteenthCheckBox} value={' Mentee'} label={' Mentee'}
                                     style={{padding: '3px'}}/>
                     </Form.Group>
-                    <Form.Group controlId="prescription">
+                    <Form.Group controlId="prescriptionSupport">
                         <Form.Label>2) Do You Support a Prescription-Only Model to Obtain Liquid
                             Nicotine?: </Form.Label>
                         <Form.Text>
@@ -351,15 +356,15 @@ const NoSmokerSubmission = ({setAllDataIn, noSmokerSub, setDataNoSmokerSub, data
                             and get it filled by a pharmacy. This could require several trips to the GP a year
                             and limited availability of nicotine options.
                         </Form.Text>
-                        <Form.Check type={'radio'} name="prescription" onChange={handleRadios} value={'Yes'}
+                        <Form.Check type={'radio'} name="prescriptionSupport" onChange={handleRadios} value={'Yes'}
                                     label={'Yes'}
                                     aria-label="Checkbox for following text input"/>
-                        <Form.Check type={'radio'} name="prescription" onChange={handleRadios} value={'No'} label={'No'}
+                        <Form.Check type={'radio'} name="prescriptionSupport" onChange={handleRadios} value={'No'} label={'No'}
                                     aria-label="Checkbox for following text input"/>
                     </Form.Group>
-                    <Form.Group controlId="story">
+                    <Form.Group controlId="personalStory">
                         <Form.Label>3) In detail, please explain why you support vaping: </Form.Label>
-                        <Form.Control as="textarea" value={story} name={"story"} onChange={handleText}
+                        <Form.Control as="textarea" value={personalStory} name={"personalStory"} onChange={handleText}
                                       required rows={3}/>
                     </Form.Group>
                     <Button

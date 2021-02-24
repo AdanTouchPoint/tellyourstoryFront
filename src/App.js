@@ -12,37 +12,45 @@ function App() {
 
     const [user, setUser] = useState({
         submissionType: '',
-        name: '',
+        firstName: '',
         lastName: '',
         age: '',
         city: '',
         state: '',
-        cp: '',
+        zipCode: '',
         email: '',
         id: '',
         smoker: ''
     });
     const [dataNoSmokerSub, setDataNoSmokerSub] = useState({
-        prescription: '',
-        story: '',
-        id: ''
+        prescriptionSupport: '',
+        personalStory: '',
+        id: '',
+        userId:''
     });
     const [dataSmokerSub, setDataSmokerSub] = useState({
         years: '',
-        quit: '',
+        tries: '',
         money: '',
-        prescription: '',
-        story: '',
+        prescriptionSupport: '',
+        personalStory: '',
         words: '',
-        id: ''
+        id: '',
+        userId:''
     });
-    const [allDataIn, setAllDataIn] = useState([])
+    const [allDataIn, setAllDataIn] = useState(
+       []
+    )
+    const [products,setProducts] = useState({
+        products:''
+    })
     const [hidden, setHidden] = useState(true)
     const [smokerSub, setSmokerSub] = useState(true)
     const [noSmokerSub, setNoSmokerSub] = useState(true)
     const [noSmokerAnswers, setNoSmokerAnswers] = useState(true)
     const [smokerAnswers, setSmokerAnswers] = useState(true)
     const [showThankYou, setShowThankYou] = useState(true)
+
     return (
         <div style={{display:'flex', flexDirection: 'column', height:'100vh' }} >
             <header style={{background: '#e4eaf1'}}>
@@ -75,6 +83,8 @@ function App() {
                 setSmokerAnswers={setSmokerAnswers}
                 setAllDataIn={setAllDataIn}
                 allDataIn={allDataIn}
+                products={products}
+                setProducts={setProducts}
             />
             <NoSmokerSubmission
                 user={user}
@@ -87,6 +97,7 @@ function App() {
             />
             <AnswersViewSmoker
                 user={user}
+                setDataSmokerSub={setDataSmokerSub}
                 dataSmokerSub={dataSmokerSub}
                 smokerAnswers={smokerAnswers}
                 setShowThankYou={setShowThankYou}
