@@ -387,15 +387,11 @@ const NoSmokerSubmission = ({user,setAllDataIn, allDataIn, noSmokerSub, setDataN
                             and get it filled by a pharmacy. This could require several trips to the GP a year
                             and limited availability of nicotine options.
                         </Form.Text>
-                        <Form.Group controlId="Yes">
-                        <Form.Check type={'radio'} name="Yes" onChange={handleRadios} value={'Yes'}
+                        <Form.Check type={'radio'} name="prescriptionSupport" onChange={handleRadios} value={'Yes'}
                                     label={'Yes'}
                                     aria-label="Checkbox for following text input"/>
-                        </Form.Group>
-                        <Form.Group controlId="No">
                         <Form.Check type={'radio'} name="prescriptionSupport" onChange={handleRadios} value={'No'} label={'No'}
                                     aria-label="Checkbox for following text input"/>
-                        </Form.Group>
                     </Form.Group>
                     <Form.Group controlId="personalStory">
                         <Form.Label>3) In detail, please explain why you support vaping: </Form.Label>
