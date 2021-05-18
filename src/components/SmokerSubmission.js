@@ -159,14 +159,14 @@ const SmokerSubmission = ({user,setDataSmokerSub, allDataIn, setAllDataIn, smoke
         ])
     }
 
-    const {years, tries, money, prescriptionSupport, personalStory, words} = dataSmokerSub;
+    const {smokedYears, tries, money, prescriptionSupport, personalStory, words} = dataSmokerSub;
     const click = e => {
         e.preventDefault();
         data().then()
-        setDataSmokerSub({
-            ...dataSmokerSub,
-            products: allDataIn.join(',')
-        })
+        // setDataSmokerSub({
+        //     ...dataSmokerSub,
+        //     products: allDataIn.join(',')
+        // })
 
         const form = e.currentTarget;
         if (form.checkValidity() === false) {
@@ -175,7 +175,7 @@ const SmokerSubmission = ({user,setDataSmokerSub, allDataIn, setAllDataIn, smoke
         }
 
         setValidated(true);
-        if (years.trim() === '' || tries.trim() === '' ||
+        if (smokedYears.trim() === '' || tries.trim() === '' ||
              money.trim() === '' || prescriptionSupport.trim() === '' || personalStory.trim() === '' || words.trim() === '') {
             setError(true)
             return
@@ -210,12 +210,12 @@ const SmokerSubmission = ({user,setDataSmokerSub, allDataIn, setAllDataIn, smoke
                 >
                 </Link>
                 <Form noValidate validated={validated}>
-                    <Form.Group controlId="years">
+                    <Form.Group controlId="smokedYears">
                         <Form.Label>1) How many years did you smoke?</Form.Label>
                         <Form.Control
                             type="number"
                             placeholder="Choose..."
-                            name="years"
+                            name="smokedYears"
                             onChange={handleText}
                             required
                         />

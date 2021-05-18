@@ -5,8 +5,8 @@ import axios from 'axios'
 
 const AnswersView = ({allDataIn,noSmokerAnswers, dataNoSmokerSub, user, setShowThankYou, setNoSmokerSub, setHidden, setNoSmokerAnswers}) => {
     const {personalStory, prescriptionSupport} = dataNoSmokerSub
-    const {submissionType, name, lastName, age, city, state, cp, email, smoker} = user;
-    // const formData = Object.assign(user, dataNoSmokerSub)
+    const {submissionType, firstName, lastName, age, city, state, cp, email, smoker} = user;
+   dataNoSmokerSub.relatives = allDataIn.toString()
     const click = async e => {
         e.preventDefault();
         setShowThankYou(false)
@@ -31,7 +31,7 @@ const AnswersView = ({allDataIn,noSmokerAnswers, dataNoSmokerSub, user, setShowT
                 </p>
                 <Card body>
                     <p>
-                        SUBJECT:{submissionType} - {name} {lastName} submission to the Tobacco Harm
+                        SUBJECT:{submissionType} - {firstName} {lastName} submission to the Tobacco Harm
                         Reduction Commitee
                     </p>
                     <p>
@@ -45,7 +45,7 @@ const AnswersView = ({allDataIn,noSmokerAnswers, dataNoSmokerSub, user, setShowT
                         Dear Commitee,
                         This submission is {submissionType}.
                         Thank you for the opportunity to provide a submission on this critical issue.
-                        My name is {name} {lastName} from {city} {state}. My:
+                        My name is {firstName} {lastName} from {city} {state}. My:
 
                     </p>
                     <p>
@@ -58,7 +58,7 @@ const AnswersView = ({allDataIn,noSmokerAnswers, dataNoSmokerSub, user, setShowT
                         The reason I support Vaping is below
                         {personalStory}
                         Sincerely,
-                        {name} {lastName}
+                        {firstName} {lastName}
                     </p>
 
                 </Card>

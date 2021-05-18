@@ -311,42 +311,73 @@ const NoSmokerSubmission = ({user,setAllDataIn, allDataIn, noSmokerSub, setDataN
                 >
                 </Link>
                 <Form noValidate validated={validated}>
-                    <Form.Group controlId="close">
+                    <Form.Group controlId="Husband">
                         <Form.Label>1) Who close to you has quit smoking by switching to vaping? (tick all that
                             apply):</Form.Label>
                         <Form.Check
-                            name="close" onClick={firstCheckBox} value={' Husband'} label={' Husband'}
+                            name="Husband" onClick={firstCheckBox} value={' Husband'} label={' Husband'}
                             style={{padding: '3px'}}/>
-                        <Form.Check name="close" onClick={secondCheckBox} value={' Wife'} label={' Wife'}
+                    </Form.Group>
+                    <Form.Group controlId="Wife">
+                        <Form.Check name="Wife" onClick={secondCheckBox} value={' Wife'} label={' Wife'}
                                     style={{padding: '3px'}}/>
-                        <Form.Check name="close" onClick={thirdCheckBox} value={' Daughter'} label={' Daughter'}
+                    </Form.Group>
+                    <Form.Group controlId="Wife">
+                        <Form.Check name="Daughter" onClick={thirdCheckBox} value={' Daughter'} label={' Daughter'}
                                     style={{padding: '3px'}}/>
-                        <Form.Check name="close" onClick={fourthCheckBox} value={' Mother'} label={' Mother'}
+                    </Form.Group>
+                    <Form.Group controlId="Mother">
+                        <Form.Check name="Mother" onClick={fourthCheckBox} value={' Mother'} label={' Mother'}
                                     style={{padding: '3px'}}/>
-                        <Form.Check name="close" onClick={fifthCheckBox} value={' Father'} label={' Father'}
+                    </Form.Group>
+                    <Form.Group controlId="Father">
+                        <Form.Check name="Father" onClick={fifthCheckBox} value={' Father'} label={' Father'}
                                     style={{padding: '3px'}}/>
-                        <Form.Check name="close" onClick={sixCheckBox} value={' Son'} label={' Son'}
+                    </Form.Group>
+                    <Form.Group controlId="Son">
+                        <Form.Check name="Son" onClick={sixCheckBox} value={' Son'} label={' Son'}
                                     style={{padding: '3px'}}/>
-                        <Form.Check name="close" onClick={sevenCheckBox} value={' Grandmother'} label={' Grandmother'}
+                    </Form.Group>
+                    <Form.Group controlId="Grandmother">
+                        <Form.Check name="Grandmother" onClick={sevenCheckBox} value={' Grandmother'} label={' Grandmother'}
                                     style={{padding: '3px'}}/>
-                        <Form.Check name="close" onClick={eightCheckBox} value={' Grandfather'} label={' Grandfather'}
+                    </Form.Group>
+                    <Form.Group controlId="Grandfather">
+                        <Form.Check name="Grandfather" onClick={eightCheckBox} value={' Grandfather'} label={' Grandfather'}
                                     style={{padding: '3px'}}/>
-                        <Form.Check name="close" onClick={nineCheckBox} value={' Aunt'} label={' Aunt'}
+                    </Form.Group>
+                    <Form.Group controlId="Aunt">
+                        <Form.Check name="Aunt" onClick={nineCheckBox} value={' Aunt'} label={' Aunt'}
                                     style={{padding: '3px'}}/>
-                        <Form.Check name="close" onClick={thenCheckBox} value={' Uncle'} label={' Uncle'}
+                    </Form.Group>
+                    <Form.Group controlId="Uncle">
+                        <Form.Check name="Uncle" onClick={thenCheckBox} value={' Uncle'} label={' Uncle'}
                                     style={{padding: '3px'}}/>
-                        <Form.Check name="close" onClick={eleventCheckBox} value={' Cousin'} label={' Cousin'}
+                    </Form.Group>
+                    <Form.Group controlId="Cousin">
+                        <Form.Check name="Cousin" onClick={eleventCheckBox} value={' Cousin'} label={' Cousin'}
                                     style={{padding: '3px'}}/>
-                        <Form.Check name="close" onClick={twelfthCheckBox} value={' Nephew'} label={' Nephew'}
+                    </Form.Group>
+                    <Form.Group controlId="Nephew">
+                        <Form.Check name="Nephew" onClick={twelfthCheckBox} value={' Nephew'} label={' Nephew'}
                                     style={{padding: '3px'}}/>
-                        <Form.Check name="close" onClick={thirteenthCheckBox} value={' Neighbour'} label={' Neighbour'}
+                    </Form.Group>
+                    <Form.Group controlId="Neighbour">
+                        <Form.Check name="Neighbour" onClick={thirteenthCheckBox} value={' Neighbour'} label={' Neighbour'}
                                     style={{padding: '3px'}}/>
-                        <Form.Check name="close" onClick={fourteenthCheckBox} value={' Friend'} label={' Friend'}
+                    </Form.Group>
+                    <Form.Group controlId="Friend">
+                        <Form.Check name="Friend" onClick={fourteenthCheckBox} value={' Friend'} label={' Friend'}
                                     style={{padding: '3px'}}/>
-                        <Form.Check name="close" onClick={fifteenthCheckBox} value={' Mentor'} label={' Mentor'}
+                    </Form.Group>
+                    <Form.Group controlId="Mentor">
+                        <Form.Check name="Mentor" onClick={fifteenthCheckBox} value={' Mentor'} label={' Mentor'}
                                     style={{padding: '3px'}}/>
-                        <Form.Check name="close" onClick={sixteenthCheckBox} value={' Mentee'} label={' Mentee'}
+                    </Form.Group>
+                    <Form.Group controlId="Mentee">
+                        <Form.Check name="Mentee" onClick={sixteenthCheckBox} value={' Mentee'} label={' Mentee'}
                                     style={{padding: '3px'}}/>
+
                     </Form.Group>
                     <Form.Group controlId="prescriptionSupport">
                         <Form.Label>2) Do You Support a Prescription-Only Model to Obtain Liquid
@@ -356,11 +387,15 @@ const NoSmokerSubmission = ({user,setAllDataIn, allDataIn, noSmokerSub, setDataN
                             and get it filled by a pharmacy. This could require several trips to the GP a year
                             and limited availability of nicotine options.
                         </Form.Text>
-                        <Form.Check type={'radio'} name="prescriptionSupport" onChange={handleRadios} value={'Yes'}
+                        <Form.Group controlId="Yes">
+                        <Form.Check type={'radio'} name="Yes" onChange={handleRadios} value={'Yes'}
                                     label={'Yes'}
                                     aria-label="Checkbox for following text input"/>
+                        </Form.Group>
+                        <Form.Group controlId="No">
                         <Form.Check type={'radio'} name="prescriptionSupport" onChange={handleRadios} value={'No'} label={'No'}
                                     aria-label="Checkbox for following text input"/>
+                        </Form.Group>
                     </Form.Group>
                     <Form.Group controlId="personalStory">
                         <Form.Label>3) In detail, please explain why you support vaping: </Form.Label>

@@ -10,6 +10,12 @@ import Footer from './components/Footer'
 
 function App() {
 
+    const [usertweet, setUsertweet] = useState({
+        firstName: '',
+        lastName: '',
+        zipCode: '',
+        email: ''
+    })
     const [user, setUser] = useState({
         submissionType: '',
         firstName: '',
@@ -26,23 +32,23 @@ function App() {
         prescriptionSupport: '',
         personalStory: '',
         id: '',
-        userId:''
+        userId: ''
     });
     const [dataSmokerSub, setDataSmokerSub] = useState({
-        years: '',
+        smokedYears: '',
         tries: '',
         money: '',
         prescriptionSupport: '',
         personalStory: '',
         words: '',
         id: '',
-        userId:''
+       userId: ''
     });
     const [allDataIn, setAllDataIn] = useState(
-       []
+        []
     )
-    const [products,setProducts] = useState({
-        products:''
+    const [products, setProducts] = useState({
+        products: ''
     })
     const [hidden, setHidden] = useState(true)
     const [smokerSub, setSmokerSub] = useState(true)
@@ -52,76 +58,76 @@ function App() {
     const [showThankYou, setShowThankYou] = useState(true)
 
     return (
-        <div style={{display:'flex', flexDirection: 'column', height:'100vh' }} >
+        <div style={{display: 'flex', flexDirection: 'column', height: '100vh'}}>
             <header style={{background: '#e4eaf1'}}>
                 <img width={'15%'} src='../public/legalise-vaping-logo.png' alt='img1'/>
             </header>
-            <div style={{background: '#6a7b8d', flex:'1'}}>
-            <h1 style={{color: 'white'}}>
-                Tell Your Story
-            </h1>
-            <Home
-                user={user}
-                setUser={setUser}
-                hidden={hidden}
-                setHidden={setHidden}
-            />
-            <RegisterForm
-                user={user}
-                setUser={setUser}
-                hidden={hidden}
-                setHidden={setHidden}
-                smokerSub={smokerSub}
-                setSmokerSub={setSmokerSub}
-                setNoSmokerSub={setNoSmokerSub}
-            />
-            <SmokerSubmission
-                user={user}
-                smokerSub={smokerSub}
-                dataSmokerSub={dataSmokerSub}
-                setDataSmokerSub={setDataSmokerSub}
-                setSmokerAnswers={setSmokerAnswers}
-                setAllDataIn={setAllDataIn}
-                allDataIn={allDataIn}
-                products={products}
-                setProducts={setProducts}
-            />
-            <NoSmokerSubmission
-                user={user}
-                noSmokerSub={noSmokerSub}
-                setDataNoSmokerSub={setDataNoSmokerSub}
-                dataNoSmokerSub={dataNoSmokerSub}
-                setNoSmokerAnswers={setNoSmokerAnswers}
-                setAllDataIn={setAllDataIn}
-                allDataIn={allDataIn}
-            />
-            <AnswersViewSmoker
-                user={user}
-                setDataSmokerSub={setDataSmokerSub}
-                dataSmokerSub={dataSmokerSub}
-                smokerAnswers={smokerAnswers}
-                setShowThankYou={setShowThankYou}
-                setSmokerSub={setSmokerSub}
-                setHidden={setHidden}
-                setSmokerAnswers={setSmokerAnswers}
-                setAllDataIn={setAllDataIn}
-                allDataIn={allDataIn}
-            />
-            <AnswersView
-                user={user}
-                dataNoSmokerSub={dataNoSmokerSub}
-                noSmokerAnswers={noSmokerAnswers}
-                setShowThankYou={setShowThankYou}
-                setNoSmokerSub={setNoSmokerSub}
-                setHidden={setHidden}
-                setNoSmokerAnswers={setNoSmokerAnswers}
-                setAllDataIn={setAllDataIn}
-                allDataIn={allDataIn}
-            />
-            <ThankYou
-                showThankYou={showThankYou}/>
+            <div style={{background: '#6a7b8d', flex: '1'}}>
+                <h1 style={{color: 'white'}}>
+                    Submission Builder
+                </h1>
+                <Home
+                    user={user}
+                    setUser={setUser}
+                    hidden={hidden}
+                    setHidden={setHidden}
+                />
+                <RegisterForm
+                    user={user}
+                    setUser={setUser}
+                    hidden={hidden}
+                    setHidden={setHidden}
+                    smokerSub={smokerSub}
+                    setSmokerSub={setSmokerSub}
+                    setNoSmokerSub={setNoSmokerSub}
+                />
+                <SmokerSubmission
+                    user={user}
+                    smokerSub={smokerSub}
+                    dataSmokerSub={dataSmokerSub}
+                    setDataSmokerSub={setDataSmokerSub}
+                    setSmokerAnswers={setSmokerAnswers}
+                    setAllDataIn={setAllDataIn}
+                    allDataIn={allDataIn}
+                    products={products}
+                    setProducts={setProducts}
+                />
+                <NoSmokerSubmission
+                    user={user}
+                    noSmokerSub={noSmokerSub}
+                    setDataNoSmokerSub={setDataNoSmokerSub}
+                    dataNoSmokerSub={dataNoSmokerSub}
+                    setNoSmokerAnswers={setNoSmokerAnswers}
+                    setAllDataIn={setAllDataIn}
+                    allDataIn={allDataIn}
+                />
+                <AnswersViewSmoker
+                    user={user}
+                    setDataSmokerSub={setDataSmokerSub}
+                    dataSmokerSub={dataSmokerSub}
+                    smokerAnswers={smokerAnswers}
+                    setShowThankYou={setShowThankYou}
+                    setSmokerSub={setSmokerSub}
+                    setHidden={setHidden}
+                    setSmokerAnswers={setSmokerAnswers}
+                    setAllDataIn={setAllDataIn}
+                    allDataIn={allDataIn}
+                />
+                <AnswersView
+                    user={user}
+                    dataNoSmokerSub={dataNoSmokerSub}
+                    noSmokerAnswers={noSmokerAnswers}
+                    setShowThankYou={setShowThankYou}
+                    setNoSmokerSub={setNoSmokerSub}
+                    setHidden={setHidden}
+                    setNoSmokerAnswers={setNoSmokerAnswers}
+                    setAllDataIn={setAllDataIn}
+                    allDataIn={allDataIn}
+                />
+                <ThankYou
+                    showThankYou={showThankYou}/>
             </div>
-        <Footer />
+            <Footer/>
 
         </div>
 

@@ -4,17 +4,18 @@ import Card from "react-bootstrap/Card";
 import axios from "axios";
 
 const AnswersViewSmoker = ({allDataIn, user, setDataSmokerSub, dataSmokerSub, smokerAnswers, setShowThankYou, setSmokerAnswers, setHidden, setSmokerSub}) => {
-    const {story, prescription, years, tries, money, words} = dataSmokerSub
-    const {submissionType, name, lastName, age, city, state, cp, email, smoker} = user;
+    const {personalStory, prescriptionSupport, smokedYears, tries, money, words} = dataSmokerSub
+    const {submissionType, firstName, lastName, age, city, state, cp, email, smoker} = user;
+     dataSmokerSub.products = allDataIn.toString()
         const click = async e => {
         e.preventDefault();
         setShowThankYou(false)
         setSmokerSub(true)
         setHidden(true)
         setSmokerAnswers(true)
-        console.log()
         await axios.post(`https://sendemail-service.herokuapp.com/send-email`, {user, dataSmokerSub,allDataIn}).then((resultOk) => {
         })
+
     }
     return (
         <div hidden={smokerAnswers} className={'container'} style={{justifyContent: 'center', display: 'flex'}}>
@@ -30,7 +31,7 @@ const AnswersViewSmoker = ({allDataIn, user, setDataSmokerSub, dataSmokerSub, sm
                 </p>
                 <Card body>
                     <p>
-                        SUBJECT:{submissionType} - {name} {lastName} submission to the Tobacco Harm
+                        SUBJECT:{submissionType} - {firstName} {lastName} submission to the Tobacco Harm
                         Reduction Commitee
                     </p>
                     <p>
@@ -44,7 +45,7 @@ const AnswersViewSmoker = ({allDataIn, user, setDataSmokerSub, dataSmokerSub, sm
                         Dear Commitee,
                         This submission is {submissionType}.
                         Thank you for the opportunity to provide a submission on this critical issue.
-                        My name is {name} {lastName} from {city} {state}. I am {age} and i smoked for {years}.
+                        My name is {firstName} {lastName} from {city} {state}. I am {age} and i smoked for {smokedYears}.
                         I tried to quit smoking {tries}, using:
                     </p>
                     <p>
@@ -53,13 +54,13 @@ const AnswersViewSmoker = ({allDataIn, user, setDataSmokerSub, dataSmokerSub, sm
                     </p>
                     But Vaping is the only method that worked for me. I have saved between {money} by
                     switching to vaping
-                    I {prescription} support a prescription-only model to obtain liquid nicotine
+                    I {prescriptionSupport} support a prescription-only model to obtain liquid nicotine
                     <p>
-                        {story}
+                        {personalStory}
                     </p>
                     <p>{words}</p>
                     Sincerely,
-                    <p>{name} {lastName}</p>
+                    <p>{firstName} {lastName}</p>
 
                 </Card>
                 <p>
@@ -77,5 +78,4 @@ const AnswersViewSmoker = ({allDataIn, user, setDataSmokerSub, dataSmokerSub, sm
 }
 
 export default AnswersViewSmoker;
-
 
